@@ -62,7 +62,7 @@ vpBeacon.setExperiments(new ArrayList<>());
 vpBeacon.getExperiments().add(new Experiments("TestId", "TestVariant"));
 
 // send beacon
-tracker.sendAddToCartEvent(vpBeacon, new GbCallback() {
+tracker.sendViewProductEvent(vpBeacon, new GbCallback() {
 	@Override
 	public void onSuccess() {
 	    // runOnUiThread Optional: The send event methods run on separate threads so runOnUiThread can be used on the callback if the UI needs to be updated.
