@@ -35,7 +35,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * metadata component
      * <p>
-     * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types. Omit if there are no metadata items you want to send in the beacon.The limit of 20 items is something we thought made sense because we don't expect customers to be using too many advanced analytics features at a time, and each additional metadata item contributes to strain on some back end systems. We can increase it if we need to in the future and if we think it won't cause technical problems to do so.
+     * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types.
+     * Omit if there are no metadata items you want to send in the beacon. Limit of 20 metadata items per beacon.
      * 
      */
     @SerializedName("metadata")
@@ -44,7 +45,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * experiments component
      * <p>
-     * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has. Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics. For more information on the kinds of experiments a GroupBy customer can run and include in beacon data, they should consult the A/B testing documentation or reach out to their Customer Success representative. The two properties names' have redundant "experiment" prefixes, which is intentional, to be backwards compatible with GroupBy's recommendations endpoints that return experiment data in this format. This allows GroupBy customers to take the experiment data returned in the recommendations response and include it as is in beacons that are sent from pages/app screens that use data from that response.The limit of 20 items is something we thought made sense because we don't expect customers to be running too many A/B tests at a time, and each additional experiment item contributes to strain on some back end systems. We can increase it if we need to in the future and if we think it won't cause technical problems to do so.
+     * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has.
+     * Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics.
      * 
      */
     @SerializedName("experiments")
@@ -53,7 +55,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * time component
      * <p>
-     * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid. Note that the format produced by web browsers' `new Date().toISOString()` is "simplified extended ISO format" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) which matches RFC3339 format. GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
+     * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid.
+     * GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
      * (Required)
      * 
      */
@@ -83,7 +86,7 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * Native app client component
      * <p>
-     * Contains data about the client sending the beacon when the client is a native app. This is a generic submodel meant to be used for all types of native apps like Android and iOS.
+     * Contains data about the client sending the beacon when the client is a native app.
      * (Required)
      * 
      */
@@ -162,7 +165,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * metadata component
      * <p>
-     * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types. Omit if there are no metadata items you want to send in the beacon.The limit of 20 items is something we thought made sense because we don't expect customers to be using too many advanced analytics features at a time, and each additional metadata item contributes to strain on some back end systems. We can increase it if we need to in the future and if we think it won't cause technical problems to do so.
+     * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types.
+     * Omit if there are no metadata items you want to send in the beacon. Limit of 20 metadata items per beacon.
      * 
      */
     public List<Metadata> getMetadata() {
@@ -172,7 +176,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * metadata component
      * <p>
-     * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types. Omit if there are no metadata items you want to send in the beacon.The limit of 20 items is something we thought made sense because we don't expect customers to be using too many advanced analytics features at a time, and each additional metadata item contributes to strain on some back end systems. We can increase it if we need to in the future and if we think it won't cause technical problems to do so.
+     * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types.
+     * Omit if there are no metadata items you want to send in the beacon. Limit of 20 metadata items per beacon.
      * 
      */
     public void setMetadata(List<Metadata> metadata) {
@@ -182,7 +187,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * experiments component
      * <p>
-     * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has. Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics. For more information on the kinds of experiments a GroupBy customer can run and include in beacon data, they should consult the A/B testing documentation or reach out to their Customer Success representative. The two properties names' have redundant "experiment" prefixes, which is intentional, to be backwards compatible with GroupBy's recommendations endpoints that return experiment data in this format. This allows GroupBy customers to take the experiment data returned in the recommendations response and include it as is in beacons that are sent from pages/app screens that use data from that response.The limit of 20 items is something we thought made sense because we don't expect customers to be running too many A/B tests at a time, and each additional experiment item contributes to strain on some back end systems. We can increase it if we need to in the future and if we think it won't cause technical problems to do so.
+     * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has.
+     * Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics.
      * 
      */
     public List<Experiments> getExperiments() {
@@ -192,7 +198,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * experiments component
      * <p>
-     * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has. Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics. For more information on the kinds of experiments a GroupBy customer can run and include in beacon data, they should consult the A/B testing documentation or reach out to their Customer Success representative. The two properties names' have redundant "experiment" prefixes, which is intentional, to be backwards compatible with GroupBy's recommendations endpoints that return experiment data in this format. This allows GroupBy customers to take the experiment data returned in the recommendations response and include it as is in beacons that are sent from pages/app screens that use data from that response.The limit of 20 items is something we thought made sense because we don't expect customers to be running too many A/B tests at a time, and each additional experiment item contributes to strain on some back end systems. We can increase it if we need to in the future and if we think it won't cause technical problems to do so.
+     * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has.
+     * Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics.
      * 
      */
     public void setExperiments(List<Experiments> experiments) {
@@ -202,7 +209,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * time component
      * <p>
-     * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid. Note that the format produced by web browsers' `new Date().toISOString()` is "simplified extended ISO format" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) which matches RFC3339 format. GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
+     * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid.
+     * GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
      * (Required)
      * 
      */
@@ -213,7 +221,8 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * time component
      * <p>
-     * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid. Note that the format produced by web browsers' `new Date().toISOString()` is "simplified extended ISO format" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) which matches RFC3339 format. GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
+     * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid.
+     * GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
      * (Required)
      * 
      */
@@ -268,7 +277,7 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * Native app client component
      * <p>
-     * Contains data about the client sending the beacon when the client is a native app. This is a generic submodel meant to be used for all types of native apps like Android and iOS.
+     * Contains data about the client sending the beacon when the client is a native app.
      * (Required)
      * 
      */
@@ -279,7 +288,7 @@ public class RemoveFromCartBeacon implements Parcelable
     /**
      * Native app client component
      * <p>
-     * Contains data about the client sending the beacon when the client is a native app. This is a generic submodel meant to be used for all types of native apps like Android and iOS.
+     * Contains data about the client sending the beacon when the client is a native app.
      * (Required)
      * 
      */

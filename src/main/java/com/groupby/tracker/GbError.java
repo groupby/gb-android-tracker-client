@@ -11,15 +11,13 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * v3 beacon 400 HTTP response body
- * <p>
- * The schema for the response body when there is a 400 error because the beacon data was invalid.additionalProperties being true is intentional here. This allows us to add more data to the HTTP response in the future without it being a major version change of the API.
  *
  */
 public class GbError implements Parcelable
 {
 
     /**
-     * The errors encountered while validating the beacon according to the request body JSON Schemas.maxItems being omitted here is intentional. This allows us to do more advanced forms of validation in the future where there are many error messages returned, without it being a major version change of the API.
+     * Schema Validation errors
      * (Required)
      *
      */
@@ -64,7 +62,7 @@ public class GbError implements Parcelable
     }
 
     /**
-     * The errors encountered while validating the beacon according to the request body JSON Schemas.maxItems being omitted here is intentional. This allows us to do more advanced forms of validation in the future where there are many error messages returned, without it being a major version change of the API.
+     * Schema Validation errors
      * (Required)
      *
      */
@@ -73,7 +71,7 @@ public class GbError implements Parcelable
     }
 
     /**
-     * The errors encountered while validating the beacon according to the request body JSON Schemas.maxItems being omitted here is intentional. This allows us to do more advanced forms of validation in the future where there are many error messages returned, without it being a major version change of the API.
+     * Schema Validation errors
      * (Required)
      *
      */

@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 /**
- * Data about the shopper's logged in/logged out status.This complex object is used instead of an optional string to help us avoid problems we've had in the past where a customer thinks that when the shopper is logged out, they're supposed to put a string value like "anonymous" in the optional string property. We think this will help us avoid this confusion.
+ * Data about the shopper's logged in/logged out status.
  * 
  */
 public class Login implements Parcelable
