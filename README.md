@@ -20,7 +20,7 @@ Add it in your root build.gradle at the end of repositories:
 //Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.tomshli:gb-tracker-client-for-android:0.1.31' //TODO: Update this with real package
+	        implementation 'com.github.groupby:gb-android-tracker-client:1.0.2'
 	}
 ```
 
