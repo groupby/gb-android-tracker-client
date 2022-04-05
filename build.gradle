@@ -1,14 +1,5 @@
 plugins {
     id ("com.android.library") version "7.1.2"
-    id "maven-publish"
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-        }
-    }
 }
 
 android {
@@ -33,17 +24,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-    namespace 'com.groupby.tracker'
-
-    afterEvaluate {
-        publishing {
-            publications {
-                release(MavenPublication) {
-                    from components.release
-                }
-            }
-        }
     }
 }
 
