@@ -2,7 +2,7 @@
 
 This is the Android SDK used to send beacons to GroupBy.
 
-## Usage from JitPack
+## Install dependency from jitpack
 
 To get the Git project into your build:
 
@@ -10,29 +10,7 @@ Step 1. Add the JitPack repository to your build file
 
 Add it in your root build.gradle at the end of repositories:
 
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-    
-Step 2. Add the dependency
-
-	dependencies {
-	        implementation 'com.github.tomshli:gb-tracker-client-for-android:0.1.31'
-	}
-
-## Usage 
-
-To import and use the tracker:
-
-```Groovy
-
-//Step 1. Add the JitPack repository to your build file
-
-//Add it in your root build.gradle at the end of repositories:
-
+```groovy
 	allprojects {
 		repositories {
 			maven { url 'https://jitpack.io' }
@@ -42,10 +20,12 @@ To import and use the tracker:
 //Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.tomshli:gb-tracker-client-for-android:0.1.31'
+	        implementation 'com.github.tomshli:gb-tracker-client-for-android:0.1.31' //TODO: Update this with real package
 	}
-
 ```
+
+
+## Usage 
 
 To import and use the tracker:
 
