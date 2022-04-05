@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        google()
+        gradlePluginPortal()
+        jcenter()
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == "com.android") {
+                useModule("com.android.tools.build:gradle:${requested.version}")
+            } else if(requested.id.namespace == "com.google.gms") {
+                useModule("com.google.gms:${requested.id.name}:${requested.version}")
+            }
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+include ':'
