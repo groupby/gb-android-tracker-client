@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Native app client component
  * <p>
- * Contains data about the client sending the beacon when the client is a native app. This is a generic submodel meant to be used for all types of native apps like Android and iOS.
+ * Contains data about the client sending the beacon when the client is a native app.
  * 
  */
 class NativeAppClient implements Parcelable
