@@ -35,6 +35,16 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     namespace 'com.groupby.tracker'
+
+    afterEvaluate {
+        publishing {
+            publications {
+                release(MavenPublication) {
+                    from components.release
+                }
+            }
+        }
+    }
 }
 
 dependencies {
