@@ -187,8 +187,7 @@ The following event types are supported in the client:
 * RemoveFromCartBeacon
 * OrderBeacon
 * RecImpressionBeacon
-* ManualSearchBeacon (Only to be used when integrating with GroupBy systems)
-* AutoSearchBeacon (Used for search events when already integrated with GroupBy systems)
+* AutoSearchBeacon (Used for search events when already integrated with GroupBy search engine)
 
 ## Examples for each event type
 
@@ -253,8 +252,7 @@ instance.sendAutoSearchEvent(beacon, new GbCallback() {
 
 ## Shopper tracking
 
-VisitorId is a UUID used to anonymously track the user. This id is not tied to any external systems and can only be used to track activity within the same app install.
-VisitorId has an expiry time of 1 year since the last time the shopper visited. After that a new Id will be generated.
+VisitorId is a UUID used to anonymously track the user. This id is not tied to any external systems and can only be used to track activity within the same app install. VisitorId has an expiry time of 1 year since the last time the shopper visited. After that, a new ID will be generated.
 
 This shared preferences is stored in a file named com.groupby.tracker, separated from other preferences used by the app.
 
