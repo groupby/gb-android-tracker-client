@@ -57,7 +57,7 @@ public class GbTracker {
     }
 
     public static GbTracker getInstance(String customerId, String area, Login login, String urlPrefixOverride) {
-        Utils.getUserAgent();
+        Utils.getUserAgent(instance.context);
 
         instance.setCustomerId(customerId);
         instance.setArea(area);
