@@ -12,7 +12,7 @@ class Utils {
     protected static String appPackageName = null;
     protected static String appVersion = null;
 
-    public static String getUserAgent(Context context) {
+    public static String getUserAgent() {
         if (null == userAgent) { // do this once and store it
             Class clazz;
             Method method;
@@ -48,7 +48,7 @@ class Utils {
             appDetails = (appPackageName == null || appPackageName.isEmpty() ? "" : appPackageName)
                     + (appVersion == null || appVersion.isEmpty() ? "" : "/" + appVersion);
 
-            userAgent = WebSettings.getDefaultUserAgent(context)
+            userAgent = System.getProperty("http.agent")
                     + " " + BuildConfig.LIBRARY_PACKAGE_NAME
                     + (appDetails.isEmpty() ? "" : " " + appDetails);
         }
