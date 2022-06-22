@@ -1,9 +1,7 @@
 package com.groupby.tracker;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.webkit.WebSettings;
 
 import java.lang.reflect.Method;
 
