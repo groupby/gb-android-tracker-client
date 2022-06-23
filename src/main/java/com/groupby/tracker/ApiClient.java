@@ -108,7 +108,8 @@ class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent(WebSettings.getDefaultUserAgent(null));
+        //setUserAgent(WebSettings.getDefaultUserAgent(null));
+        setUserAgent(System.getProperty("http.agent"));
     }
 
     /**

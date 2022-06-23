@@ -2,7 +2,6 @@ package com.groupby.tracker;
 
 import android.app.Application;
 import android.content.pm.PackageInfo;
-import android.webkit.WebSettings;
 
 import java.lang.reflect.Method;
 
@@ -47,7 +46,7 @@ class Utils {
             appDetails = (appPackageName == null || appPackageName.isEmpty() ? "" : appPackageName)
                     + (appVersion == null || appVersion.isEmpty() ? "" : "/" + appVersion);
 
-            userAgent = WebSettings.getDefaultUserAgent(null)
+            userAgent = System.getProperty("http.agent")
                     + " " + BuildConfig.LIBRARY_PACKAGE_NAME
                     + (appDetails.isEmpty() ? "" : " " + appDetails);
         }
