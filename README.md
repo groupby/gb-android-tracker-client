@@ -39,6 +39,10 @@ dependencies {
 ...
 ```
 
+You'll know you've completed these steps properly if Android Studio has autocompletion help for the `GbTracker` class:
+
+![image](https://user-images.githubusercontent.com/7719209/188748073-c11673ff-3187-4218-9403-d765ad8ccc93.png)
+
 ## Usage
 
 ### Importing classes
@@ -124,24 +128,107 @@ instance.sendViewProductEvent(beacon, new GbCallback() {
 });
 ```
 
-### Reading validation error messages
+### Testing for validation errors
 
-If a property in the request body is invalid because invalid data was used while creating instances of the model classes, then the error returned in the `onFailure` callback will contain a list of validation error messages.
+You can use the callback available for every beacon sending method to test whether the HTTP request sending the beacon had a 400 Bad Request response sent back with validation errors. In Android Studio, you can use the emulator and Logcat tab in the debugger to see these messages when they are logged with `Log.e`, `Log.i`, etc.
 
-Example:
-
-Request:
+For example, you can run the following code which sends a valid autoSearch beacon:
 
 ```java
-// Invalid because if `isLoggedIn` is set to true, then the shopper username cannot be an empty string.
-instance.setLogin(new Login(true, ""));
+private void sendAutoSearchEvent() {
+        // Create instance of tracker
+        String customerId = "<customer-id>";
+        String area = "<area>";
+        // Represents a shopper who is not logged in
+        Login login = new Login();
+        login.setLoggedIn(false);
+        login.setUsername(null);
+        GbTracker tracker = GbTracker.getInstance(customerId, area, login);
+
+        // Code below assumes a tracker has been created called "tracker"
+
+        // Prepare event object
+        AutoSearchEvent event = new AutoSearchEvent();
+        event.setSearchId(UUID.fromString("167e44d4-2140-4098-91b0-1e1f0558fd8c"));
+        event.setOrigin(AutoSearchEvent.Origin.SEARCH);
+
+        // Prepare beacon object, including event object in it
+        AutoSearchBeacon beacon = new AutoSearchBeacon();
+        beacon.setEvent(event);
+        beacon.setMetadata(null);
+        beacon.setExperiments(null);
+
+        // Use beacon object to send beacon with tracker
+        tracker.sendAutoSearchEvent(beacon, new GbCallback() {
+            @Override
+            public void onFailure(GbException e, int statusCode) {
+                String msg = "Failed to send beacon: " + e.getMessage();
+                if (statusCode == 400  && e.getError() != null) {
+                    List<String> validationErrors = e.getError().getJsonSchemaValidationErrors();
+                    msg = msg + "; validation errors:" + validationErrors;
+                }
+                Log.e("TEST", msg, e);
+            }
+
+            @Override
+            public void onSuccess() {
+                String msg = "Sent beacon successfully.";
+                Log.i("TEST", msg);
+            }
+        });
+    }
 ```
 
-Errors in logs (see `onFailure` handler example above):
+This code can be wired up to a GUI element to send a test beacon like this:
+
+```java
+// Starting from code in starter Android Studio project
+binding.fab.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        // Calling our new method to send the test beacon
+        sendAutoSearchEvent();
+        Snackbar.make(view, "Invoked code to send beacon.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+    }
+});
+```
+
+You can click the GUI element in the emulator send the test beacon:
+
+![image](https://user-images.githubusercontent.com/7719209/188751310-a25a8d5d-db57-42ae-adc4-0c68d2166035.png)
+
+When you do this, based on the code above, a snackbar will be displayed:
+
+![image](https://user-images.githubusercontent.com/7719209/188751336-f8612a36-d5cb-499f-81f6-fb9fed4d289d.png)
+
+You can filter to the string "TEST" in the Logcat tab, because this value was used as the tag in the code above when logging:
+
+![image](https://user-images.githubusercontent.com/7719209/188751550-40c5cfba-4a4b-4c6f-bf7b-29ababaf4405.png)
+
+You will see the following logged in the Logcat tab in Android Studio:
+
+![image](https://user-images.githubusercontent.com/7719209/188750610-9fbd0853-ba75-4a81-b1b3-1e138ddd7d5b.png)
+
+Instead, you can send an invalid beacon. For example, one where the login data is omitted. Properties in this SDK must be set to `null` explicitly. They cannot be omitted:
+
+```java
+// Represents a shopper who is not logged in
+Login login = new Login();
+login.setLoggedIn(false);
+login.setUsername(null);
+GbTracker tracker = GbTracker.getInstance(customerId, area, login);
+```
+
+When you send an invalid beacon, the error logging code above will result in you seeing this in the Logcat tab in Android Studio:
+
+![image](https://user-images.githubusercontent.com/7719209/188751932-023b0671-5947-4563-8332-ab2eccb2e8fe.png)
+
+Error code copied here in text form too:
 
 ```
-E/ANDROID_BEACON_TEST: Failed to send beacon: Error (response status = 400). Validation errors: [[shopper.login: Must validate one and only one schema (oneOf), shopper.login.username: String length must be greater than or equal to 1]].
-    com.groupby.tracker.GbException: 
+2022-09-06 18:31:45.335 4180-4260/com.example.myapplication E/TEST: Failed to send beacon: Bad Request; validation errors:[shopper.login: Must validate one and only one schema (oneOf), shopper.login: loggedIn is required]
+    com.groupby.tracker.GbException: Bad Request
         at com.groupby.tracker.ApiClient.handleResponse(ApiClient.java:839)
         at com.groupby.tracker.ApiClient$1.onResponse(ApiClient.java:791)
         at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:519)
@@ -150,15 +237,38 @@ E/ANDROID_BEACON_TEST: Failed to send beacon: Error (response status = 400). Val
         at java.lang.Thread.run(Thread.java:923)
 ```
 
-### Including metadata and experiments in events
+In the real world, you should re-use your tracker instance across the lifetime of your app, not creating a new instance each time you want to send a beacon. These code examples create new tracker instances each time for demonstration purposes.
 
-To include metadata in an event, create a list of metadata items using the model classes and include them in the beacon:
+## Event types
+
+The following event types are supported in the client. The "main four" event types are what GroupBy considers to be a minimum required beacon implementation in your Android app:
+
+| Event type | Among "main four"? | Description |
+| ------------- | ------------- | ------- |
+| autoSearch  | Yes | For sending the search ID of a search you perform against a GroupBy search API to GroupBy's beacon system. |
+| viewProduct  | Yes | For sending details of which product (or SKU within a product) the shopper is viewing details of. |
+| addToCart | Yes | For sending details of which products (or SKUs within products) the shopper is adding to their cart. |
+| removeFromCart | No | For sending details of which products (or SKUs within products) the shopper is removing from their cart. |
+| order | Yes | For sending details of which products (or SKUs within products) the shopper is ordering. |
+| recImpression | No | For sending details of which products (or SKUs within products) the shopper is viewing on a page where you're rendering recommendations from a GroupBy recommendation API. |
+
+When at least the main four event types have been implemented, session level insights become available instead of just event level insights. For example, you can get a breakdown via GroupBy's analytics of which search terms are leading your shoppers to the products they're buying.
+
+## Including metadata and experiments in events
+
+### Metadata
+
+To include metadata alongside an event in the beacon, create a list of metadata items using the model classes and include them in the beacon:
 
 ```java
 List<Metadata> metadata = new ArrayList<>();
 metadata.add(new Metadata("example-key", "example-value"));
 beacon.setMetadata(metadata);
 ```
+
+You will only need to add metadata for advanced use cases. It is not required. Consult with your Customer Success specialist for more into.
+
+### Experiments
 
 To include experiments (for A/B testing) in an event, create a list of experiments using the model classes and include them in the beacon. Note that despite the model name "Experiments", each instance represents one experiment and multiple experiments can be added to the event, one for each A/B test being conducted:
 
@@ -169,29 +279,13 @@ experiments.add(new Experiments("example-id2", "example-variant2"));
 beacon.setExperiments(experiments);
 ```
 
-## Internal GroupBy testing
-
-By default beacons will be send to the production environment. This can be overridden by specifying a URL to send the beacons in the tracker constructor. This is useful for sending beacons to a test environment or to GroupBy's development environment.
-
-```java
-// Optional, overrides the URL the beacon is sent to. Useful for testing.
-GbTracker tracker = GbTracker.getInstance("customer_id", "area", <some_url>);
-```
-
-## Supported event types
-
-The following event types are supported in the client:
-
-* AddToCartBeacon
-* ViewProductBeacon
-* RemoveFromCartBeacon
-* OrderBeacon
-* RecImpressionBeacon
-* AutoSearchBeacon (Used for search events when already integrated with GroupBy search engine)
+You will only need to add experiments if you are running an A/B test where you want to measure the difference between beacons in one A/B test bucket vs. another in GroupBy's analytics. If you are not running an A/B test, the experiments property is not relevant to you and you don't need to implement it in your beacons.
 
 ## Examples for each event type
 
 ### autoSearch
+
+Sends details of a search event 
 
 The autoSearch event is meant to be used after you've performed a request to GroupBy's search API, so for this example, here is a method that returns mock search results. In your app, this would be whichever code calls the GroupBy search API. Note that in this example, it is blocking, but in your app, it may be non-blocking:
 
@@ -249,15 +343,37 @@ instance.sendAutoSearchEvent(beacon, new GbCallback() {
 });
 ```
 
+### viewProduct
+
+TBD
+
+### addToCart
+
+TBD
+
+### removeFromCart
+
+TBD
+
+### order
+
+TBD
+
+### recImpression
+
+TBD
 
 ## Shopper tracking
 
-VisitorId is a UUID used to anonymously track the user. This id is not tied to any external systems and can only be used to track activity within the same app install. VisitorId has an expiry time of 1 year since the last time the shopper visited. After that, a new ID will be generated.
+VisitorId is a UUID used to anonymously track the user. This ID is not tied to any external systems and can only be used to track activity within the same app install. VisitorId has an expiry time of 1 year since the last time the shopper visited. After that, a new ID will be generated.
 
 This shared preferences is stored in a file named com.groupby.tracker, separated from other preferences used by the app.
 
-## More Usage Details
+## Internal GroupBy testing
 
-See the docs for more detailed information about implementing beacons:
+By default, beacons will be send to the production environment. This can be overridden by specifying a URL to send the beacons in the tracker constructor. This is useful for sending beacons to a test environment or to GroupBy's development environment.
 
-https://docs.groupbycloud.com/gb-docs/gb-implementation/beacons/overview
+```java
+// Optional, overrides the URL the beacon is sent to. Useful for testing.
+GbTracker tracker = GbTracker.getInstance("customer_id", "area", "<some_url>");
+```
