@@ -237,7 +237,7 @@ Error code copied here in text form too:
         at java.lang.Thread.run(Thread.java:923)
 ```
 
-In the real world, you should re-use your tracker instance across the lifetime of your app, not creating a new instance each time you want to send a beacon. These code examples create new tracker instances each time for demonstration purposes.
+In the real world, you should re-use your tracker instance across the lifetime of your app, not create a new instance each time you want to send a beacon. These code examples create new tracker instances each time for demonstration purposes.
 
 ## Event types
 
