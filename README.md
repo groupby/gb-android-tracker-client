@@ -210,13 +210,13 @@ You will see the following logged in the Logcat tab in Android Studio:
 
 ![image](https://user-images.githubusercontent.com/7719209/188750610-9fbd0853-ba75-4a81-b1b3-1e138ddd7d5b.png)
 
-Instead, you can send an invalid beacon. For example, one where the login data is omitted. Properties in this SDK must be set to `null` explicitly. They cannot be omitted:
+You can also send an invalid beacon. For example, one where the login data is omitted. Properties in this SDK must be set to `null` explicitly. They cannot be omitted:
 
 ```java
 // Represents a shopper who is not logged in
 Login login = new Login();
-login.setLoggedIn(false);
-login.setUsername(null);
+// login.setLoggedIn(false);
+// login.setUsername(null);
 GbTracker tracker = GbTracker.getInstance(customerId, area, login);
 ```
 
