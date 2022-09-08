@@ -169,7 +169,7 @@ When at least the main four event types have been implemented, session level ins
 
 For lists of required and optional properties and examples for each event type, see:
 
-* autoSearch - [docs/autoSearch.md]
+* [autoSearch](docs/autoSearch.md)
 * viewProduct - TBD
 * addToCart - TBD
 * removeFromCart - TBD
