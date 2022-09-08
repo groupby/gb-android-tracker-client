@@ -2,138 +2,51 @@
 
 This is the Android SDK used to send beacons to GroupBy.
 
-## Install dependency from JitPack
+## Installing
 
-Instructions for installing dependencies from JitPack differ based on what kind of Gradle project layout you have. These instructions are based on a new Android app created in April 2022 in the latest version of Android Studio at the time, with "basic activity" selected during the wizard.
+You can install the library into your Android app via [Jitpack](https://jitpack.io/).
 
-1. Add `maven {url 'https://www.jitpack.io'}` the JitPack repository to the `settings.gradle` file under `repositories`, under `dependencyResolutionManagement`.
+1. Add the Jitpack Maven repository to your Gradle config by adding `maven {url 'https://www.jitpack.io'}` under `repositories` under `dependencyResolutionManagement`.
+2. Add the desired version of the library under `dependencies`. For example, `implementation 'com.github.groupby:gb-android-tracker-client:1.0.3'`.
+3. Perform a Gradle sync.
 
-```
-...
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven {url 'https://www.jitpack.io'}
-    }
-}
-...
-```
+See [installing](docs/installing.md) for more details.
 
-2. Add the version of the dependency you want to use to the module `build.gradle` file (not the project `build.gradle` file). Versions usable for production start at `1.0.2`.
+## Creating the tracker instance
 
-```
-...
-dependencies {
+You must program your app so that this happens when the app starts and a reference should be kept to the same tracker client object to re-use throughout the entire lifecycle of your app on the shopper's Android device.
 
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    implementation 'com.github.groupby:gb-android-tracker-client:1.0.2'
-}
-...
-```
-
-You'll know you've completed these steps properly if Android Studio has autocompletion help for the `GbTracker` class:
-
-![image](https://user-images.githubusercontent.com/7719209/188748073-c11673ff-3187-4218-9403-d765ad8ccc93.png)
-
-## Usage
-
-### Importing classes
-
-To import and use the tracker:
+Example:
 
 ```java
-import com.groupby.tracker.GbTracker;
+// login status for a shopper who is not logged in
+Login login = new Login(false, null);
+GbTracker instance = GbTracker.getInstance("my-customer-id", "my-area", login);
 ```
 
-All other classes used in example code below are imported from `com.groupby.tracker` package.
+See [Creating the tracker instance](docs/creating_the_tracker_instance.md) for more details.
 
-### Creating an instance and controlling logged in status
+## Sending events
 
-The user's login data can be set during the creation of the tracker instance or set when the user logs in after the tracker is already created.
+You must program your app so that the `sendXEvent` methods (where "X" is the name of the event to send) are called at the appropriate times throughout the lifecycle of your app on the shopper's Android device, reflecting shopping behavior. The single instance of the tracker (described in the previous step) should be re-used to do this.
 
-This allows activities between multiple merchandiser applications and web to be attributed to the same user.
+An example of a method you can call to send an event is the `sendViewProductEvent` method.
 
-To create an instance of the tracker for a shopper who is logged in:
+See [Sending events](docs/sending_events.md) for more details.
 
-```java
-GbTracker instance = GbTracker.getInstance("my-customer-id",
-        "my-area",
-        new Login(true, "shopper's-username"));
-```
+## Setting login status
 
-To create an instance of the tracker for a shopper who is not logged in:
+Login status describes whether the shopper is logged in or not when the event occurs. With this information set in the tracker GroupBy can anonymously track shoppers across their devices, not just anonymously track them in the Android app.
 
-```java
-GbTracker instance = GbTracker.getInstance("my-customer-id",
-        "my-area",
-        new Login(false, null));
-```
+You can set the login status as you create the tracker instance and by mutating an existing tracker instance throughout the lifecycle of the app.
 
-To change the shopper's status from "not logged in" to "logged in" at any point during the app's lifecycle after the instance has been created:
+See [Setting login status](docs/setting_login_status.md) for more details.
+
+## Validation
+
+You can test your beacon implementation for validation errors using the `onFailure` callback. Example, where validation errors returned in a 400 Bad Request response are logged:
 
 ```java
-instance.setLogin(new Login(true, "shopper's-username"));
-```
-
-To change the shopper's status from "logged in" to "not logged in" at any point during the app's lifecycle after the instance has been created:
-
-```java
-instance.setLogin(new Login(false, null));
-```
-
-### Sending events
-
-To send an event, call the `sendXEvent` method where "X" is the type of event you want to send.
-
-Example for viewProduct event:
-
-```java
-// Specifying all required properties for viewProduct beacon. Using "null" for optional
-// properties, as required by the SDK.
-ViewProductBeacon beacon = new ViewProductBeacon(new ViewProductEvent(new Product("abc123", null, "A product",
-        null, null, new Price(false, null, "100.00", "USD")), null), null, null);
-
-String APP_TAG = "ANDROID_BEACON_TEST";
-
-// Logging and toasting on UI thread only for example purposes. Remove before deploying
-// code to production if desired.
-instance.sendViewProductEvent(beacon, new GbCallback() {
-    @Override
-    public void onFailure(GbException e, int statusCode) {
-        String errMsg = "Error (response status = " + statusCode + ").";
-        if (e.getError() != null) {
-            // If an error was provided, it was a 400 response and it will have at least one validation error.
-            List<String> validationErrors = e.getError().getJsonSchemaValidationErrors();
-            errMsg = errMsg + " Validation errors: [" + validationErrors + "].";
-        }
-        String msg = "Failed to send beacon: " + errMsg;
-        Log.e(APP_TAG, msg, e);
-        runOnUiThread(() -> Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show());
-    }
-
-    @Override
-    public void onSuccess() {
-        String msg = "Sent beacon successfully!";
-        Log.e(APP_TAG, msg);
-        runOnUiThread(() -> Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show());
-    }
-});
-```
-
-### Validation
-
-You can test your beacon implementation for validation errors using the `OnFailure` callback. Example, where validation errors returned in a 400 Bad Request response are logged:
-
-```java
-...
 @Override
 public void onFailure(GbException e, int statusCode) {
     String msg = "Failed to send beacon: " + e.getMessage();
@@ -143,65 +56,46 @@ public void onFailure(GbException e, int statusCode) {
     }
     Log.e("TEST", msg, e);
 }
-...
 ```
 
 You can see these logs in Android Studio while debugging your app:
 
 ![image](https://user-images.githubusercontent.com/7719209/188751932-023b0671-5947-4563-8332-ab2eccb2e8fe.png)
 
-For more details, see [validation](docs/validation.md).
+See [Validation](docs/validation.md) for more details.
 
 ## Event types
 
 The following event types are supported in the client. The "main four" event types are what GroupBy considers to be a minimum required beacon implementation in your Android app:
 
-| Event type | Among "main four"? | Description |
-| ------------- | ------------- | ------- |
-| autoSearch  | Yes | For sending the search ID of a search you perform against a GroupBy search API to GroupBy's beacon system. |
-| viewProduct  | Yes | For sending details of which product (or SKU within a product) the shopper is viewing details of. |
-| addToCart | Yes | For sending details of which products (or SKUs within products) the shopper is adding to their cart. |
-| removeFromCart | No | For sending details of which products (or SKUs within products) the shopper is removing from their cart. |
-| order | Yes | For sending details of which products (or SKUs within products) the shopper is ordering. |
-| recImpression | No | For sending details of which products (or SKUs within products) the shopper is viewing on a page where you're rendering recommendations from a GroupBy recommendation API. |
+| Event type | In "main four"? | Description | Details |
+| ---------- | --------------- | ----------- | ------- |
+| autoSearch  | Yes | For sending the search ID of a search you perform against a GroupBy search API to GroupBy's beacon system. | [autoSearch](docs/autoSearch.md)
+| viewProduct  | Yes | For sending details of which product (or SKU within a product) the shopper is viewing details of. | [viewProduct](docs/viewProduct.md)
+| addToCart | Yes | For sending details of which products (or SKUs within products) the shopper is adding to their cart. | [autoSearch](docs/addToCart.md)
+| removeFromCart | No | For sending details of which products (or SKUs within products) the shopper is removing from their cart. | [removeFromCart](docs/removeFromCart.md)
+| order | Yes | For sending details of which products (or SKUs within products) the shopper is ordering. | [order](docs/order.md)
+| recImpression | No | For sending details of which products (or SKUs within products) the shopper is viewing on a page where you're rendering recommendations from a GroupBy recommendation API. | [recImpression](docs/recImpression.md)
 
 When at least the main four event types have been implemented, session level insights become available instead of just event level insights. For example, you can get a breakdown via GroupBy's analytics of which search terms are leading your shoppers to the products they're buying.
-
-For lists of required and optional properties and examples for each event type, see:
-
-* [autoSearch](docs/autoSearch.md)
-* viewProduct - TBD
-* addToCart - TBD
-* removeFromCart - TBD
-* order - TBD
-* recImpression - TBD
 
 ## Including metadata and experiments in events
 
 ### Metadata
 
-To include metadata alongside an event in the beacon, create a list of metadata items using the model classes and include them in the beacon:
+Metadata is miscellaneous key value pair data not part of each event's schema that you can include in each beacon you send.
 
-```java
-List<Metadata> metadata = new ArrayList<>();
-metadata.add(new Metadata("example-key", "example-value"));
-beacon.setMetadata(metadata);
-```
+When you include metadata in beacons you send, you extend GroupBy's analytics by enabling new dimensions.
 
-You will only need to add metadata for advanced use cases. It is not required. Consult with your Customer Success specialist for more into.
+See [Metadata](metadata.md) for more details.
 
 ### Experiments
 
-To include experiments (for A/B testing) in an event, create a list of experiments using the model classes and include them in the beacon. Note that despite the model name "Experiments", each instance represents one experiment and multiple experiments can be added to the event, one for each A/B test being conducted:
+Experiments are key value pairs of data not part of each event's schema that you can in each beacon you send.
 
-```java
-List<Experiments> experiments = new ArrayList<>();
-experiments.add(new Experiments("example-id", "example-variant"));
-experiments.add(new Experiments("example-id2", "example-variant2"));
-beacon.setExperiments(experiments);
-```
+When you are running an A/B test, including details of the experiments in your A/B testing allows you to extend GroupBy's analytics by using your experiment as a a new dimension in analytics. For example, you can measure revenue for each bucket in your experiment.
 
-You will only need to add experiments if you are running an A/B test where you want to measure the difference between beacons in one A/B test bucket vs. another in GroupBy's analytics. If you are not running an A/B test, the experiments property is not relevant to you and you don't need to implement it in your beacons.
+See [Experiments](experiments.md) for more details.
 
 ## Shopper tracking
 

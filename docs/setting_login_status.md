@@ -1,0 +1,21 @@
+# Setting login status
+
+Login status describes whether the shopper is logged in or not when the event occurs. GroupBy anonymously tracks shoppers. It doesn't need the shopper to be logged in to track them. The Android library sets a unique ID for the device (called visitor ID) which stays with the app install for up to 1 year after the last activity.
+
+But if the shopper is logged in, and the library is configured correctly, GroupBy also receives a second unique ID. This ID is for the shopper, not the device. This allows GroupBy to track the shopper across their devices if the GroupBy customer has configured multiple tracker SDKs (ex. web, Android, iOS) correctly.
+
+To ensure the login ID is only used anonymously, GroupBy hashes it when it receives it at the server.
+
+You can set login status as you create the tracker instance. See [creating the tracker instance](docs/creating_the_tracker_instance.md) for details on doing it that way. But you can also set a new login status as the app runs by mutating the existing tracker instance you created earlier in the app's lifecycle.
+
+To change the shopper's status from "not logged in" to "logged in" at any point during the app's lifecycle after the instance has been created:
+
+```java
+instance.setLogin(new Login(true, "shopper's-username"));
+```
+
+To change the shopper's status from "logged in" to "not logged in" at any point during the app's lifecycle after the instance has been created:
+
+```java
+instance.setLogin(new Login(false, null));
+```
