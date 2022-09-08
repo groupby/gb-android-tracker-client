@@ -150,7 +150,7 @@ You can see these logs in Android Studio while debugging your app:
 
 ![image](https://user-images.githubusercontent.com/7719209/188751932-023b0671-5947-4563-8332-ab2eccb2e8fe.png)
 
-For more details, see [docs/validation.md].
+For more details, see [validation](docs/validation.md).
 
 ## Event types
 
