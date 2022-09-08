@@ -87,7 +87,7 @@ Metadata is miscellaneous key value pair data not part of each event's schema th
 
 When you include metadata in beacons you send, you extend GroupBy's analytics by enabling new dimensions.
 
-See [Metadata](metadata.md) for more details.
+See [Metadata](docs/metadata.md) for more details.
 
 ### Experiments
 
@@ -95,7 +95,7 @@ Experiments are key value pairs of data not part of each event's schema that you
 
 When you are running an A/B test, including details of the experiments in your A/B testing allows you to extend GroupBy's analytics by using your experiment as a a new dimension in analytics. For example, you can measure revenue for each bucket in your experiment.
 
-See [Experiments](experiments.md) for more details.
+See [Experiments](docs/experiments.md) for more details.
 
 ## Shopper tracking
 

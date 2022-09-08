@@ -22,4 +22,13 @@ experiments.add(new Experiments("your-second-experiment-id", "variant1"));
 beacon.setExperiments(experiments);
 ```
 
+## Schema
+
+```java
+List<Experiments> l = new ArrayList<>(); // min num items 1, max num items 20
+Experiments m = new Experiments();
+m.setExperimentId("abc"); // required, min length 1, max length 50
+m.setExperimentVariant("def"); // required, min length 1, max length 50
+```
+
 Consult with your Technical Implementation Consultant at GroupBy for more guidance using this feature.

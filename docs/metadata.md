@@ -13,4 +13,13 @@ metadata.add(new Metadata("example-key2", "example-value2"));
 beacon.setMetadata(metadata);
 ```
 
+## Schema
+
+```java
+List<Metadata> l = new ArrayList<>(); // min num items 1, max num items 20
+Metadata m = new Metadata(); 
+m.setKey("abc"); // required, min length 1, max length 50
+m.setValue("def"); // required, min length 1, max length 1000
+```
+
 Consult with your Technical Implementation Consultant at GroupBy for more guidance using this feature.

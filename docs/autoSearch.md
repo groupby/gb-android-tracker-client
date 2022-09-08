@@ -1,8 +1,24 @@
 # autoSearch
 
-Sends details of a search event.
+After performing a search using a GroupBy search API, this is used for sending details of the search to GroupBy's beacon API. The details are sent from the web browser using this event instead of being retrieved internally by GroupBy so that client tracking works correctly and aligns with the rest of the event types which must be sent from the client.
 
-The autoSearch event is meant to be used after you've performed a request to GroupBy's search API, so for this example, here is a method that returns mock search results. In your app, this would be whichever code calls the GroupBy search API. Note that in this example, it is blocking, but in your app, it may be non-blocking:
+The search request could be a request to GroupBy's search API directly, or through a proxy.
+
+Note that in this example, it is blocking because the example data is stored in memory, but in your app, it may be non-blocking.
+
+Example data, retrieved by calling a method:
+
+```java
+private static class ExampleSearchResults {
+    List<String> records;
+    String searchId;
+
+    ExampleSearchResults(List<String> records, String searchId) {
+        this.records = records;
+        this.searchId = searchId;
+    }
+}
+```
 
 ```java
 /**
@@ -20,40 +36,56 @@ private ExampleSearchResults exampleSearchRequest() {
 }
 ```
 
-Sending the event in a beacon:
+Sending the beacon:
 
 ```java
-// Tag for logging, if needed.
-String APP_TAG = "test_tag";
+// Create instance of tracker
+String customerId = "<your-customer-id>";
+String area = "<your-area>";
+// Represents a shopper who is not logged in
+Login login = new Login();
+login.setLoggedIn(false);
+login.setUsername(null);
+GbTracker tracker = GbTracker.getInstance(customerId, area, login);
 
-// 1) Perform search request.
+// Code below assumes a tracker has been created called "tracker"
+
+// Perform search request
 ExampleSearchResults results = exampleSearchRequest();
 
-// 2a) Use search result data to render search results to app user.
-// Can be done concurrently with step 2b.
-// Not shown in this example.
+// Prepare event object
+AutoSearchEvent event = new AutoSearchEvent();
+event.setSearchId(UUID.fromString(results.searchId)); // required, string in UUID min length 1
+event.setOrigin(AutoSearchEvent.Origin.SEARCH); // required
 
-// 2b) Use search result data to send an autoSearch beacon.
-// This can be done concurrently with step 2a.
-AutoSearchBeacon beacon = new AutoSearchBeacon(new AutoSearchEvent(
-        UUID.fromString(results.searchId),
-        AutoSearchEvent.Origin.SEARCH),
-        null, // no metadata in this example
-        null); // no experiments in this example
+// Prepare beacon object, including event object in it
+AutoSearchBeacon beacon = new AutoSearchBeacon();
+beacon.setEvent(event);
+beacon.setMetadata(null); // optional
+beacon.setExperiments(null); // optional
 
-instance.sendAutoSearchEvent(beacon, new GbCallback() {
+// Use tracker instance to send beacon
+tracker.sendAutoSearchEvent(beacon, new GbCallback() {
     @Override
     public void onFailure(GbException e, int statusCode) {
         String msg = "Failed to send beacon: " + e.getMessage();
-        Log.e(APP_TAG, msg, e);
-        runOnUiThread(() -> Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+        if (statusCode == 400  && e.getError() != null) {
+            List<String> validationErrors = e.getError().getJsonSchemaValidationErrors();
+            msg = msg + "; validation errors:" + validationErrors;
+        }
+        Log.e("TEST", msg, e);
     }
 
     @Override
     public void onSuccess() {
-        String msg = "Sent beacon successfully!";
-        Log.e(APP_TAG, msg);
-        runOnUiThread(() -> Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show());
+        String msg = "Sent beacon successfully.";
+        Log.i("TEST", msg);
     }
 });
 ```
+
+See [Metadata](metadata.md) for the schema of the metadata component.
+
+See [Experiments](experiments.md) for the schema of the experiments component.
+
+In the real world, you should re-use your tracker instance across the lifetime of your app, not create a new instance each time you want to send a beacon. These code examples create new tracker instances each time for demonstration purposes.
