@@ -287,7 +287,7 @@ You will only need to add experiments if you are running an A/B test where you w
 
 Sends details of a search event.
 
-See [docs/autoSearch.md].
+See [docs/autoSearch.md](docs/autoSearch.md).
 
 ### viewProduct
 
