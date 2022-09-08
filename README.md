@@ -70,7 +70,7 @@ The following event types are supported in the client. The "main four" event typ
 
 | Event type | In "main four"? | Description | Details |
 | ---------- | --------------- | ----------- | ------- |
-| autoSearch  | Yes | For sending the search ID of a search you perform against a GroupBy search API to GroupBy's beacon system. | [autoSearch](docs/autoSearch.md)
+| autoSearch  | Yes | After performing a search using a GroupBy search API, this is used for sending details of the search to GroupBy's beacon API. The details are sent from the web browser using this event instead of being retrieved internally by GroupBy so that client tracking works correctly and aligns with the rest of the event types which must be sent from the client. | [autoSearch](docs/autoSearch.md)
 | viewProduct  | Yes | For sending details of which product (or SKU within a product) the shopper is viewing details of. | [viewProduct](docs/viewProduct.md)
 | addToCart | Yes | For sending details of which products (or SKUs within products) the shopper is adding to their cart. | [autoSearch](docs/addToCart.md)
 | removeFromCart | No | For sending details of which products (or SKUs within products) the shopper is removing from their cart. | [removeFromCart](docs/removeFromCart.md)
