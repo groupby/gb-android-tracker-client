@@ -131,6 +131,6 @@ OrderBeacon:
 
 ## Additional schemas
 
-See [Metadata](metadata.md) for the schema of the metadata component.
-
 See [Experiments](experiments.md) for the schema of the experiments component.
+
+See [Metadata](metadata.md) for the schema of the metadata component.
