@@ -1,4 +1,4 @@
-# experiments
+# Experiments
 
 Experiments are key value pairs of data not part of each event's schema that you can include each beacon you send.
 

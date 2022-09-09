@@ -1,4 +1,4 @@
-# metadata
+# Metadata
 
 Metadata is miscellaneous key value pair data not part of each event's schema that you can include in each beacon you send.
 
