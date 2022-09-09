@@ -86,7 +86,7 @@ Price:
 
 | Property | Description | Java type | Required? | Min | Max | String format |
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
-| actual | The price the customer would pay (if viewing) or paid (for order events) for the product. | `String` | Yes | n/a | 100 | ^[0-9]{1,9}\\.?[0-9]{1,2}$ |
+| actual | The price the customer would pay for the product as they added it to their cart. | `String` | Yes | n/a | 100 | ^[0-9]{1,9}\\.?[0-9]{1,2}$ |
 | currency | The ISO 4217 code of the currency for the product. | `String` | Yes | 3 | 3 | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format |
 | onSale | Whether the product was on sale when the shopper viewed details of it. | `Boolean` | Yes | n/a | n/a | n/a |
 | regular | The regular price of the product (when it is not on sale). Disallowed when property onSale is set to `false`. | `String` | When property onSale is set to `true`. | n/a | 100 | ^[0-9]{1,9}\\.?[0-9]{1,2}$ |
@@ -113,7 +113,7 @@ Cart:
 
 | Property | Description | Java type | Required? | Min | Max | String format |
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
-| items | The cart items in the cart. | `List<CartItem>` | Yes | 1 | 1000 | n/a |
+| items | The cart items being added to the cart. | `List<CartItem>` | Yes | 1 | 1000 | n/a |
 | type | A value to label the cart with to differentiate it from other types of carts you might have. Ex. "gift registry". If provided, this will not affect search personalization or recommendations but will provide a new dimension to use in analytics dashboards. | `String` | No | 1 | 100 | n/a |
 
 AddToCartEvent:
