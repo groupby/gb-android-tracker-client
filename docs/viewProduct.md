@@ -85,6 +85,7 @@ Product:
 | id | The product's ID in your catalog stored in GroupBy's system. | String | Yes | 1 | 36 | n/a |
 | price | Contains data about the price of the product, including whether it was on sale to the shopper when the event occurred. | com.groupby.tracker.model.Price | Yes | n/a | n/a | n/a |
 | sku | The product's SKU in your catalog stored in GroupBy's system. | String | No | 1 | 73 | n/a |
+| title | The product's title. This is used in GroupBy UIs that render information about the product. | String | Yes | 1 | 100 | n/a |
 
 
 ViewProductEvent:
