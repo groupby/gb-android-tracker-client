@@ -73,7 +73,7 @@ Price:
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
 | actual | The price the customer would pay (if viewing) or paid (for order events) for the product. | String | Yes | n/a | 100 | ^[0-9]{1,9}\\.?[0-9]{1,2}$ |
 | currency | The ISO 4217 code of the currency for the product. | String | Yes | 3 | 3 | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format |
-| onSale | Whether the product was on sale when the shopper viewed details of it. | The ISO 4217 code of the currency for the product. | Boolean | Yes | n/a | n/a | n/a |
+| onSale | Whether the product was on sale when the shopper viewed details of it. | Boolean | Yes | n/a | n/a | n/a |
 | regular | The regular price of the product (when it is not on sale). Disallowed when the property onSale is set to `false`. | Boolean | When property onSale is set to `true`. | n/a | 100 | ^[0-9]{1,9}\\.?[0-9]{1,2}$ |
 
 Product:
