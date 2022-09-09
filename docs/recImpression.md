@@ -96,7 +96,7 @@ RecImpressionEvent:
 | Property | Description | Java type | Required? | Min | Max | String format |
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
 | googleAttributionToken | The Google attribution token as described in Google Cloud Platform's [documentation for Cloud Retail Solutions](https://cloud.google.com/retail/docs/attribution-tokens). Instructions for implementing this are evolving over time. If you use GroupBy's Google-powered platform, reach out to your Customer Success rep to find out whether you need to implement this property and if so, how you should do it. | `String` | No | 1 | 100 | n/a |
-| products | The products recommended to the shopper. | `List<Product>` | Yes |  | 1 | 50 |
+| products | The products recommended to the shopper. | `List<Product>` | Yes | 1 | 50 | n/a |
 
 ## Additional schemas
 
