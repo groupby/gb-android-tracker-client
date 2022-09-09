@@ -6,8 +6,8 @@ You must only include the products or SKUs that the shopper is adding to their c
 
 ```java
 // Create instance of tracker
-String customerId = "swansonhealth";
-String area = "InternalTesting";
+String customerId = "<your-customer-id>";
+String area = "<your-area>";
 // Represents a shopper who is not logged in
 Login login = new Login();
 login.setLoggedIn(false);
