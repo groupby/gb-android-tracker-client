@@ -31,4 +31,4 @@ protected void onCreate(Bundle savedInstanceState) {
 
 This example was for when the important event occurred when the activity started. That's why it uses the `onCreate` lifecycle hook method. Your situation and app design might be different. You may need to use different hooks or respond to a UI element being tapped, etc.
 
-This example is only meant to describe when to send an event, so it doesn't fill in the viewProduct event details. For complete viewProduct event details, see [viewProduct](docs/viewProduct.md).
+This example is only meant to describe when to send an event, so it doesn't fill in the viewProduct event details. For complete viewProduct event details, see [viewProduct](viewProduct.md).
