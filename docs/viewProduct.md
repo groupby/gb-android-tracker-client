@@ -83,7 +83,7 @@ Product:
 | category | The category the product belongs to in your catalog's category hierarchy. | String | No | 1 | 100 | n/a |
 | collection | The collection the product belongs to in GroupBy's systems after it has been uploaded to GroupBy. | String | No | 1 | 100 | n/a |
 | id | The product's ID in your catalog stored in GroupBy's system. | String | Yes | 1 | 36 | n/a |
-| price | Contains data about the price of a product in event types that involve products. | com.groupby.tracker.model.Price | Yes | n/a | n/a | n/a |
+| price | Contains data about the price of the product, including whether it was on sale to the shopper when the event occurred. | com.groupby.tracker.model.Price | Yes | n/a | n/a | n/a |
 | sku | The product's SKU in your catalog stored in GroupBy's system. | String | No | 1 | 73 | n/a |
 
 
