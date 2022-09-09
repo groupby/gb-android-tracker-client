@@ -18,19 +18,19 @@ GbTracker tracker = GbTracker.getInstance(customerId, area, login);
 
 // Prepare price for product
 Price price = new Price();
-price.setActual("12.34"); // required, max length 100, must fit pattern ^[0-9]{1,9}\\.?[0-9]{1,2}$
-price.setCurrency("usd"); // required, length 3, must be an ISO 4217 code
-price.setOnSale(true); // required, must be true or false
-price.setRegular("23.45"); // required if onSale is true, disallowed if onSale is false, max length 100, must fit pattern ^[0-9]{1,9}\\.?[0-9]{1,2}$
+price.setActual("12.34");
+price.setCurrency("usd");
+price.setOnSale(true);
+price.setRegular("23.45");
 
 // Prepare product for list of products
 Product product = new Product();
-product.setCategory("abc123"); // optional, min length 1, max length 100
-product.setCollection("abc123"); // optional, min length 1, max length 50, defaults to "default"
-product.setId("abc123"); // required, min length 1, max length 36
-product.setPrice(price); // required
-product.setSku("abc123"); // optional, min length 1, max length 73
-product.setTitle("abc123"); // required, min length 1, max length 100
+product.setCategory("abc123");
+product.setCollection("abc123");
+product.setId("abc123");
+product.setPrice(price);
+product.setSku("abc123");
+product.setTitle("abc123");
 
 // Prepare list of products for event
 List<Product> products = new ArrayList<>();
@@ -38,14 +38,14 @@ products.add(product);
 
 // Prepare event for beacon
 RecImpressionEvent event = new RecImpressionEvent();
-event.setGoogleAttributionToken("abc123"); // optional, min length 1, max length 100
-event.setProducts(products); // required, min items 1, max items 50
+event.setGoogleAttributionToken("abc123");
+event.setProducts(products);
 
 // Prepare beacon for request
 RecImpressionBeacon beacon = new RecImpressionBeacon();
-beacon.setEvent(event); // required
-beacon.setMetadata(null); // optional
-beacon.setExperiments(null); // optional
+beacon.setEvent(event);
+beacon.setMetadata(null);
+beacon.setExperiments(null);
 
 // Use tracker instance to send beacon
 tracker.sendRecImpressionEvent(beacon, new GbCallback() {

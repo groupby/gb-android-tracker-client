@@ -57,14 +57,14 @@ ExampleSearchResults results = exampleSearchRequest();
 
 // Prepare event for beacon
 AutoSearchEvent event = new AutoSearchEvent();
-event.setSearchId(UUID.fromString(results.searchId)); // required, string in UUID min length 1
-event.setOrigin(AutoSearchEvent.Origin.SEARCH); // required, must be one of AutoSearchEvent.Origin enum values
+event.setSearchId(UUID.fromString(results.searchId));
+event.setOrigin(AutoSearchEvent.Origin.SEARCH);
 
 // Prepare beacon for request
 AutoSearchBeacon beacon = new AutoSearchBeacon();
 beacon.setEvent(event);
-beacon.setMetadata(null); // optional
-beacon.setExperiments(null); // optional
+beacon.setMetadata(null);
+beacon.setExperiments(null);
 
 // Use tracker instance to send beacon
 tracker.sendAutoSearchEvent(beacon, new GbCallback() {
