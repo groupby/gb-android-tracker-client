@@ -83,7 +83,7 @@ Product:
 | category | The category the product belongs to in your catalog's category hierarchy. | `String` | No | 1 | 100 | n/a |
 | collection | The collection the product belongs to in GroupBy's systems after it has been uploaded to GroupBy. | `String` | No | 1 | 100 | n/a |
 | id | The product's ID in your catalog stored in GroupBy's system. | `String` | Yes | 1 | 36 | n/a |
-| `Price` | Contains data about the price of the product, including whether it was on sale to the shopper when the event occurred. | `Price` | Yes | n/a | n/a | n/a |
+| price | Contains data about the price of the product, including whether it was on sale to the shopper when the event occurred. | `Price` | Yes | n/a | n/a | n/a |
 | sku | The product's SKU in your catalog stored in GroupBy's system. | `String` | No | 1 | 73 | n/a |
 | title | The product's title. This is used in GroupBy UIs that render information about the product. | `String` | Yes | 1 | 100 | n/a |
 
@@ -93,7 +93,7 @@ ViewProductEvent:
 | Property | Description | Java type | Required? | Min | Max | String format |
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
 | googleAttributionToken | The Google attribution token as described in Google Cloud Platform's documentation for Cloud Retail Solutions (https://cloud.google.com/retail/docs/attribution-tokens). Instructions for implementing this are evolving over time. If you use GroupBy's Google-powered platform, reach out to your Customer Success rep to find out whether you need to implement this property and if so, how you should do it. | `String` | No | 1 | 100 | n/a |
-| `Product` | The product the shopper viewed details of. | `Product` | Yes | n/a | n/a | n/a |
+| product | The product the shopper viewed details of. | `Product` | Yes | n/a | n/a | n/a |
 
 ## Additional schemas
 
