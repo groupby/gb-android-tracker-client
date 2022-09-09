@@ -68,7 +68,7 @@ public void onFailure(GbException e, int statusCode) {
 
 You can see these logs in Android Studio while debugging your app:
 
-![image](docs/https://user-images.githubusercontent.com/7719209/188751932-023b0671-5947-4563-8332-ab2eccb2e8fe.png)
+![image](https://user-images.githubusercontent.com/7719209/188751932-023b0671-5947-4563-8332-ab2eccb2e8fe.png)
 
 See [Validation](docs/validation.md) for more details.
 
