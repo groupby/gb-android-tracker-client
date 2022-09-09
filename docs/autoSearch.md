@@ -6,6 +6,8 @@ The search request could be a request to GroupBy's search API directly, or throu
 
 Note that in this example, it is blocking because the example data is stored in memory, but in your app, it may be non-blocking.
 
+## Example
+
 Example data, retrieved by calling a method:
 
 ```java
@@ -84,8 +86,19 @@ tracker.sendAutoSearchEvent(beacon, new GbCallback() {
 });
 ```
 
+In the real world, you should re-use your tracker instance across the lifetime of your app, not create a new instance each time you want to send a beacon. These code examples create new tracker instances each time for demonstration purposes.
+
+## Properties
+
+autoSearch event properties:
+
+| Property | Description | Java Type | Required? | Min | Max | String format |
+| -------- | ----------- | --------- | --------- | --- | --- | ------------- |
+| searchId | The ID of the search performed with the GroupBy search engine API. This ID is returned in each HTTP response from the API and must be included in this event. | UUID | Yes | n/a | n/a | `java.util.UUID` format |
+| origin | The context in which the search was performed. Acceptable values are \"search\" (used when a search query is used with the API), \"sayt\" (used when GroupBy's SAYT search engine API is used instead of its regular search engine API, for search-as-you-type use cases), and \"navigation\" (used when no search query is used because the search engine is being used to power a PLP consisting of a category of products, often after a shopper has selected a facet). | `AutoSearchEvent.Origin` enum value | Yes | n/a | n/a | n/a
+
+## Additional schemas
+
 See [Metadata](metadata.md) for the schema of the metadata component.
 
 See [Experiments](experiments.md) for the schema of the experiments component.
-
-In the real world, you should re-use your tracker instance across the lifetime of your app, not create a new instance each time you want to send a beacon. These code examples create new tracker instances each time for demonstration purposes.
