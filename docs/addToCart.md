@@ -113,7 +113,7 @@ Cart:
 
 | Property | Description | Java type | Required? | Min | Max | String format |
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
-| items | The cart items in the cart. | List<CartItem> | Yes | 1 | 1000 | n/a |
+| items | The cart items in the cart. | `List<CartItem>` | Yes | 1 | 1000 | n/a |
 | type | A value to label the cart with to differentiate it from other types of carts you might have. Ex. "gift registry". If provided, this will not affect search personalization or recommendations but will provide a new dimension to use in analytics dashboards. | String | No | 1 | 100 | n/a |
 
 AddToCartEvent:
