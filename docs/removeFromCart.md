@@ -1,8 +1,8 @@
-# addToCart
+# removeFromCart
 
-For sending details of which products (or SKUs within products) the shopper is adding to their cart.
+For sending details of which products (or SKUs within products) the shopper is removing from their cart.
 
-You must only include the products or SKUs that the shopper is adding to their cart during this event, not the products or SKUs the cart has after this event occurs.
+You must only include the products or SKUs that the shopper is removing from their cart during this event, not the products or SKUs the cart has after this event occurs.
 
 Example:
 
@@ -49,18 +49,18 @@ cart.setItems(items); // required, min items 1, max items 1000
 cart.setType("abc123"); // optional, min length 1, max length 100
 
 // Prepare event for beacon
-AddToCartEvent event = new AddToCartEvent();
+RemoveFromCartEvent event = new RemoveFromCartEvent();
 event.setGoogleAttributionToken("abc123"); // optional, min length 1, max length 100
 event.setCart(cart); // required
 
 // Prepare beacon for request
-AddToCartBeacon beacon = new AddToCartBeacon();
+RemoveFromCartBeacon beacon = new RemoveFromCartBeacon();
 beacon.setEvent(event); // required
 beacon.setMetadata(null); // optional
 beacon.setExperiments(null); // optional
 
 // Use tracker instance to send beacon
-tracker.sendAddToCartEvent(beacon, new GbCallback() {
+tracker.sendRemoveFromCartEvent(beacon, new GbCallback() {
     @Override
     public void onFailure(GbException e, int statusCode) {
         String msg = "Failed to send beacon: " + e.getMessage();
