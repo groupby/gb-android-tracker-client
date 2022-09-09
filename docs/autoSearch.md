@@ -53,12 +53,12 @@ GbTracker tracker = GbTracker.getInstance(customerId, area, login);
 // Perform search request
 ExampleSearchResults results = exampleSearchRequest();
 
-// Prepare event object
+// Prepare event for beacon
 AutoSearchEvent event = new AutoSearchEvent();
 event.setSearchId(UUID.fromString(results.searchId)); // required, string in UUID min length 1
-event.setOrigin(AutoSearchEvent.Origin.SEARCH); // required
+event.setOrigin(AutoSearchEvent.Origin.SEARCH); // required, must be one of AutoSearchEvent.Origin enum values
 
-// Prepare beacon object, including event object in it
+// Prepare beacon for request
 AutoSearchBeacon beacon = new AutoSearchBeacon();
 beacon.setEvent(event);
 beacon.setMetadata(null); // optional
@@ -71,7 +71,7 @@ tracker.sendAutoSearchEvent(beacon, new GbCallback() {
         String msg = "Failed to send beacon: " + e.getMessage();
         if (statusCode == 400  && e.getError() != null) {
             List<String> validationErrors = e.getError().getJsonSchemaValidationErrors();
-            msg = msg + "; validation errors:" + validationErrors;
+            msg = msg + "; validation errors: " + validationErrors;
         }
         Log.e("TEST", msg, e);
     }
