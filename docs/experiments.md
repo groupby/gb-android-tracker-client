@@ -25,7 +25,7 @@ beacon.setExperiments(experiments);
 ## Schema
 
 ```java
-List<Experiments> l = new ArrayList<>(); // min num items 1, max num items 20
+List<Experiments> l = new ArrayList<>(); // min items 1, max items 20
 Experiments m = new Experiments();
 m.setExperimentId("abc"); // required, min length 1, max length 50
 m.setExperimentVariant("def"); // required, min length 1, max length 50

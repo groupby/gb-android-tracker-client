@@ -16,7 +16,7 @@ beacon.setMetadata(metadata);
 ## Schema
 
 ```java
-List<Metadata> l = new ArrayList<>(); // min num items 1, max num items 20
+List<Metadata> l = new ArrayList<>(); // min items 1, max items 20
 Metadata m = new Metadata(); 
 m.setKey("abc"); // required, min length 1, max length 50
 m.setValue("def"); // required, min length 1, max length 1000
