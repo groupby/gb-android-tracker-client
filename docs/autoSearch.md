@@ -94,7 +94,7 @@ In the real world, you should re-use your tracker instance across the lifetime o
 
 | Property | Description | Java Type | Required? | Min | Max | String format |
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
-| searchId | The ID of the search performed with the GroupBy search engine API. This ID is returned in each HTTP response from the API and must be included in this event. | UUID | Yes | n/a | n/a | `java.util.UUID` format |
+| searchId | The ID of the search performed with the GroupBy search engine API. This ID is returned in each HTTP response from the API and must be included in this event. | UUID | Yes | n/a | n/a | n/a |
 | origin | The context in which the search was performed. Acceptable values are \"search\" (used when a search query is used with the API), \"sayt\" (used when GroupBy's SAYT search engine API is used instead of its regular search engine API, for search-as-you-type use cases), and \"navigation\" (used when no search query is used because the search engine is being used to power a PLP consisting of a category of products, often after a shopper has selected a facet). | `AutoSearchEvent.Origin` enum value | Yes | n/a | n/a | n/a
 
 ## Additional schemas
