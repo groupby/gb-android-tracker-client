@@ -123,6 +123,14 @@ AddToCartEvent:
 | googleAttributionToken | The Google attribution token as described in Google Cloud Platform's [documentation for Cloud Retail Solutions](https://cloud.google.com/retail/docs/attribution-tokens). Instructions for implementing this are evolving over time. If you use GroupBy's Google-powered platform, reach out to your Customer Success rep to find out whether you need to implement this property and if so, how you should do it. | `String` | No | 1 | 100 | n/a |
 | cart | The cart related to the event. | `Cart` | Yes | n/a | n/a | n/a |
 
+AddToCartBeacon:
+
+| Property | Description | Java type | Required? | Min | Max | String format |
+| -------- | ----------- | --------- | --------- | --- | --- | ------------- |
+| event | The event data for the beacon. | `AddToCartEvent` | Yes | n/a | n/a | n/a |
+| experiments | The A/B testing experiments related to the event. | `List<Experiments>` | No | 1 | 20 | n/a |
+| metadata | The metadata for the event. | `List<Metadata>` | No | 1 | 20 | n/a |
+
 ## Additional schemas
 
 See [Metadata](metadata.md) for the schema of the metadata component.
