@@ -2,7 +2,7 @@
 
 For sending details of which product (or SKU within a product) the shopper is viewing details of.
 
-Example:
+## Example
 
 ```java
 // Create instance of tracker
@@ -63,8 +63,41 @@ tracker.sendViewProductEvent(beacon, new GbCallback() {
 });
 ```
 
+In the real world, you should re-use your tracker instance across the lifetime of your app, not create a new instance each time you want to send a beacon. These code examples create new tracker instances each time for demonstration purposes.
+
+## Properties
+
+Price:
+
+| Property | Description | Java Type | Required? | Min | Max | String format |
+| -------- | ----------- | --------- | --------- | --- | --- | ------------- |
+| actual | The price the customer would pay (if viewing) or paid (for order events) for the product. | String | Yes | n/a | 100 | ^[0-9]{1,9}\\.?[0-9]{1,2}$ |
+| currency | The ISO 4217 code of the currency for the product. | String | Yes | 3 | 3 | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format |
+| onSale | Whether the product was on sale when the shopper viewed details of it. | The ISO 4217 code of the currency for the product. | Boolean | Yes | n/a | n/a | n/a |
+| regular | The regular price of the product (when it is not on sale). Disallowed when the property onSale is set to `false`. | Boolean | When property onSale is set to `true`. | n/a | 100 | ^[0-9]{1,9}\\.?[0-9]{1,2}$ |
+
+Product:
+
+| Property | Description | Java Type | Required? | Min | Max | String format |
+| -------- | ----------- | --------- | --------- | --- | --- | ------------- |
+| category | The category the product belongs to in your catalog's category hierarchy. | String | No | 1 | 100 | n/a |
+| collection | The collection the product belongs to in GroupBy's systems after it has been uploaded to GroupBy. | String | No | 1 | 100 | n/a |
+| id | The product's ID in your catalog stored in GroupBy's system. | String | Yes | 1 | 36 | n/a |
+| price | Contains data about the price of a product in event types that involve products. | com.groupby.tracker.model.Price | Yes | n/a | n/a | n/a |
+| sku | The product's SKU in your catalog stored in GroupBy's system. | String | No | 1 | 73 | n/a |
+
+
+ViewProductEvent:
+
+| Property | Description | Java Type | Required? | Min | Max | String format |
+| -------- | ----------- | --------- | --------- | --- | --- | ------------- |
+| googleAttributionToken | The Google attribution token as described in Google Cloud Platform's documentation for Cloud Retail Solutions (https://cloud.google.com/retail/docs/attribution-tokens). Instructions for implementing this are evolving over time. If you use GroupBy's Google-powered platform, reach out to your Customer Success rep to find out whether you need to implement this property and if so, how you should do it. | String | No | 1 | 100 | n/a |
+| product | The product the shopper viewed details of. | com.groupby.tracker.model.Product | Yes | n/a | n/a | n/a |
+
+## Additional schemas
+
 See [Metadata](metadata.md) for the schema of the metadata component.
 
 See [Experiments](experiments.md) for the schema of the experiments component.
 
-In the real world, you should re-use your tracker instance across the lifetime of your app, not create a new instance each time you want to send a beacon. These code examples create new tracker instances each time for demonstration purposes.
+

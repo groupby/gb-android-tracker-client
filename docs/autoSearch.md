@@ -90,7 +90,7 @@ In the real world, you should re-use your tracker instance across the lifetime o
 
 ## Properties
 
-`AutoSearchEvent` properties:
+AutoSearchEvent:
 
 | Property | Description | Java Type | Required? | Min | Max | String format |
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
