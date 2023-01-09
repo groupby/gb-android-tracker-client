@@ -167,7 +167,7 @@ public class GbTracker {
         this.customer = value;
     }
 
-    private String getVisitorId() {
+    public String getVisitorId() {
         if (shopperTracking == null)
         {
             return null;
