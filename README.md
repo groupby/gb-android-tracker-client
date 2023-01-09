@@ -15,7 +15,7 @@ Examples of platform components enhanced by beacons:
 You can install the library into your Android app via [Jitpack](https://www.jitpack.io).
 
 1. Add the Jitpack Maven repository to your Gradle config by adding `maven {url 'https://www.jitpack.io'}` under `repositories` under `dependencyResolutionManagement`.
-2. Add the desired version of the library under `dependencies`. For example, `implementation 'com.github.groupby:gb-android-tracker-client:1.0.3'`.
+2. Add the desired version of the library under `dependencies`. For example, `implementation 'com.github.groupby:gb-android-tracker-client:1.1.0'`.
 3. Perform a Gradle sync.
 
 See [installing](docs/installing.md) for more details.
