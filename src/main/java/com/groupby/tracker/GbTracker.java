@@ -244,38 +244,22 @@ public class GbTracker {
             metadata = new ArrayList<>();
         }
 
-        if (this.siteFilterMetadataValue != null && !this.siteFilterMetadataValue.equalsIgnoreCase(""))
+        boolean valueSet = false;
+        for (int i = 0; i < metadata.size(); i++)
         {
-            boolean valueSet = false;
-            for (int i = 0; i < metadata.size(); i++)
+            Metadata siteFilterMetadata = metadata.get(i);
+            if (siteFilterMetadata.getKey().equalsIgnoreCase("siteFilter"))
             {
-                Metadata siteFilterMetadata = metadata.get(i);
-                if (siteFilterMetadata.getKey().equalsIgnoreCase("siteFilter"))
-                {
-                    siteFilterMetadata.setValue(this.siteFilterMetadataValue);
-                    valueSet = true;
-                }
-            }
-
-            if (!valueSet)
-            {
-                Metadata siteFilterMetadata = new Metadata();
-                siteFilterMetadata.setKey("siteFilter");
-                siteFilterMetadata.setValue(this.siteFilterMetadataValue);
-                metadata.add(siteFilterMetadata);
+                valueSet = true;
             }
         }
-        else
+
+        if (!valueSet)
         {
-            for (int i = 0; i < metadata.size(); i++)
-            {
-                Metadata siteFilterMetadata = metadata.get(i);
-                if (siteFilterMetadata.getKey().equalsIgnoreCase("siteFilter"))
-                {
-                    metadata.remove(i);
-                    break;
-                }
-            }
+            Metadata siteFilterMetadata = new Metadata();
+            siteFilterMetadata.setKey("siteFilter");
+            siteFilterMetadata.setValue(this.siteFilterMetadataValue == null? "" : this.siteFilterMetadataValue);
+            metadata.add(siteFilterMetadata);
         }
 
         return metadata;
