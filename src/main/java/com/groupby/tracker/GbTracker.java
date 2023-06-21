@@ -248,17 +248,17 @@ public class GbTracker {
         for (int i = 0; i < metadata.size(); i++)
         {
             Metadata siteFilterMetadata = metadata.get(i);
-            if (siteFilterMetadata.getKey().equalsIgnoreCase("siteFilter"))
+            if (siteFilterMetadata.getKey().equalsIgnoreCase("sitefilter"))
             {
                 valueSet = true;
             }
         }
 
-        if (!valueSet)
+        if (!valueSet && this.siteFilterMetadataValue != null)
         {
             Metadata siteFilterMetadata = new Metadata();
-            siteFilterMetadata.setKey("siteFilter");
-            siteFilterMetadata.setValue(this.siteFilterMetadataValue == null? "" : this.siteFilterMetadataValue);
+            siteFilterMetadata.setKey("sitefilter");
+            siteFilterMetadata.setValue(this.siteFilterMetadataValue);
             metadata.add(siteFilterMetadata);
         }
 
