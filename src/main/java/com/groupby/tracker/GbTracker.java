@@ -6,6 +6,7 @@ import android.os.Build;
 
 import com.google.gson.reflect.TypeToken;
 import com.groupby.tracker.model.Login;
+import com.groupby.tracker.model.Metadata;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class GbTracker {
     private Customer customer;
     private ShopperTracking shopperTracking;
     private NativeAppClient nativeAppClient;
+
+    private String siteFilterMetadataValue;
 
     GbTracker() {
 
@@ -213,6 +216,14 @@ public class GbTracker {
         }
     }
 
+    public String getSite() {
+        return siteFilterMetadataValue;
+    }
+
+    public void setSite(String value) {
+        this.siteFilterMetadataValue = value;
+    }
+
 
     private String capitalize(String s) {
         if (s == null || s.length() == 0) {
@@ -224,6 +235,34 @@ public class GbTracker {
         } else {
             return Character.toUpperCase(first) + s.substring(1);
         }
+    }
+
+    private List<Metadata> setSiteFilterMetadataValue(List<Metadata> metadata)
+    {
+        if (metadata == null)
+        {
+            metadata = new ArrayList<>();
+        }
+
+        boolean valueSet = false;
+        for (int i = 0; i < metadata.size(); i++)
+        {
+            Metadata siteFilterMetadata = metadata.get(i);
+            if (siteFilterMetadata.getKey().equalsIgnoreCase("sitefilter"))
+            {
+                valueSet = true;
+            }
+        }
+
+        if (!valueSet && this.siteFilterMetadataValue != null)
+        {
+            Metadata siteFilterMetadata = new Metadata();
+            siteFilterMetadata.setKey("sitefilter");
+            siteFilterMetadata.setValue(this.siteFilterMetadataValue);
+            metadata.add(siteFilterMetadata);
+        }
+
+        return metadata;
     }
 
     /**
@@ -245,6 +284,7 @@ public class GbTracker {
         addToCartBeacon.setCustomer(this.getCustomer());
         addToCartBeacon.setShopper(this.getShopperTracking());
         addToCartBeacon.setClient(this.getNativeAppClient());
+        addToCartBeacon.setMetadata(setSiteFilterMetadataValue(addToCartBeacon.getMetadata()));
 
         Object localVarPostBody = addToCartBeacon;
 
@@ -322,6 +362,7 @@ public class GbTracker {
         autoSearchBeacon.setCustomer(this.getCustomer());
         autoSearchBeacon.setShopper(this.getShopperTracking());
         autoSearchBeacon.setClient(this.getNativeAppClient());
+        autoSearchBeacon.setMetadata(setSiteFilterMetadataValue(autoSearchBeacon.getMetadata()));
 
         Object localVarPostBody = autoSearchBeacon;
 
@@ -399,6 +440,7 @@ public class GbTracker {
         viewProductBeacon.setCustomer(this.getCustomer());
         viewProductBeacon.setShopper(this.getShopperTracking());
         viewProductBeacon.setClient(this.getNativeAppClient());
+        viewProductBeacon.setMetadata(setSiteFilterMetadataValue(viewProductBeacon.getMetadata()));
 
         Object localVarPostBody = viewProductBeacon;
 
@@ -476,6 +518,7 @@ public class GbTracker {
         removeFromCartBeacon.setCustomer(this.getCustomer());
         removeFromCartBeacon.setShopper(this.getShopperTracking());
         removeFromCartBeacon.setClient(this.getNativeAppClient());
+        removeFromCartBeacon.setMetadata(setSiteFilterMetadataValue(removeFromCartBeacon.getMetadata()));
 
         Object localVarPostBody = removeFromCartBeacon;
 
@@ -553,6 +596,7 @@ public class GbTracker {
         orderBeacon.setCustomer(this.getCustomer());
         orderBeacon.setShopper(this.getShopperTracking());
         orderBeacon.setClient(this.getNativeAppClient());
+        orderBeacon.setMetadata(setSiteFilterMetadataValue(orderBeacon.getMetadata()));
 
         Object localVarPostBody = orderBeacon;
 
@@ -630,6 +674,7 @@ public class GbTracker {
         recImpressionBeacon.setCustomer(this.getCustomer());
         recImpressionBeacon.setShopper(this.getShopperTracking());
         recImpressionBeacon.setClient(this.getNativeAppClient());
+        recImpressionBeacon.setMetadata(setSiteFilterMetadataValue(recImpressionBeacon.getMetadata()));
 
         Object localVarPostBody = recImpressionBeacon;
 
@@ -707,6 +752,7 @@ public class GbTracker {
         manualSearchBeacon.setCustomer(this.getCustomer());
         manualSearchBeacon.setShopper(this.getShopperTracking());
         manualSearchBeacon.setClient(this.getNativeAppClient());
+        manualSearchBeacon.setMetadata(setSiteFilterMetadataValue(manualSearchBeacon.getMetadata()));
 
         Object localVarPostBody = manualSearchBeacon;
 
