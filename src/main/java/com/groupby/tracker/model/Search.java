@@ -1,7 +1,40 @@
 package com.groupby.tracker.model;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
-public class Search {
+public class Search implements Parcelable {
+
+    protected Search(Parcel in) {
+        this.query = in.readString();
+        this.totalRecordCount = in.readLong();
+        this.pageInfo = ((PageInfo) in.readValue((PageInfo.class.getClassLoader())));
+        in.readList(this.records, (Record.class.getClassLoader()));
+        in.readList(this.selectedNavigation, (SelectedNavigation.class.getClassLoader()));
+    }
+
+    public static final Creator<Search> CREATOR = new Creator<Search>() {
+        @Override
+        public Search createFromParcel(Parcel in) {
+            return new Search(in);
+        }
+
+        @Override
+        public Search[] newArray(int size) {
+            return new Search[size];
+        }
+    };
+
+    public Search createFromParcel(android.os.Parcel in) {
+        return new Search(in);
+    }
+    public Search(){
+
+    }
     private String query;
     private long totalRecordCount;
     private PageInfo pageInfo;
@@ -48,47 +81,17 @@ public class Search {
         this.selectedNavigation = selectedNavigation;
     }
 
-    public static class PageInfo {
-        private long recordStart;
-        private long recordEnd;
-
-        public long getRecordStart() {
-            return recordStart;
-        }
-
-        public void setRecordStart(long recordStart) {
-            this.recordStart = recordStart;
-        }
-
-        public long getRecordEnd() {
-            return recordEnd;
-        }
-
-        public void setRecordEnd(long recordEnd) {
-            this.recordEnd = recordEnd;
-        }
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public static class Record {
-        private String id;
-        private String title;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(query);
+        dest.writeLong(totalRecordCount);
     }
+
 
     public static class SelectedNavigation {
         // Define the structure of SelectedNavigation here if available in your schema.
