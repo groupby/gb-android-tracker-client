@@ -4,12 +4,12 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SearchEvent implements Parcelable {
-    protected SearchEvent(android.os.Parcel in) {
+public class SearchEve implements Parcelable {
+    protected SearchEve(android.os.Parcel in) {
         this.search = ((Search) in.readValue((Search.class.getClassLoader())));
         this.googleAttributionToken = ((String) in.readValue((String.class.getClassLoader())));
     }
-    public SearchEvent(){
+    public SearchEve(){
 
     }
     @SerializedName("googleAttributionToken")
@@ -27,15 +27,15 @@ public class SearchEvent implements Parcelable {
         this.search = search;
     }
 
-    public static final Creator<SearchEvent> CREATOR = new Creator<SearchEvent>() {
+    public static final Creator<SearchEve> CREATOR = new Creator<SearchEve>() {
         @Override
-        public SearchEvent createFromParcel(Parcel in) {
-            return new SearchEvent(in);
+        public SearchEve createFromParcel(Parcel in) {
+            return new SearchEve(in);
         }
 
         @Override
-        public SearchEvent[] newArray(int size) {
-            return new SearchEvent[size];
+        public SearchEve[] newArray(int size) {
+            return new SearchEve[size];
         }
     };
 

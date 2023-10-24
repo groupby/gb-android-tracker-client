@@ -93,8 +93,4 @@ public class Search implements Parcelable {
     }
 
 
-    public static class SelectedNavigation {
-        // Define the structure of SelectedNavigation here if available in your schema.
-        // You can create a similar class as above to represent its structure.
-    }
 }
