@@ -9,6 +9,9 @@ public class SearchEvent implements Parcelable {
         this.search = ((Search) in.readValue((Search.class.getClassLoader())));
         this.googleAttributionToken = ((String) in.readValue((String.class.getClassLoader())));
     }
+    public SearchEvent(){
+
+    }
     @SerializedName("googleAttributionToken")
     @Expose
     private String googleAttributionToken;
