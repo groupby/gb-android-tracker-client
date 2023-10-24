@@ -18,6 +18,15 @@ public class SearchEvent implements Parcelable {
     @SerializedName("search")
     @Expose
     private Search search;
+
+    public void setgoogleAttributionToken(String googleAttributionToken) {
+        this.googleAttributionToken = googleAttributionToken;
+    }
+
+    public void SetSearch(Search search) {
+        this.search = search;
+    }
+
     public static final Creator<SearchEvent> CREATOR = new Creator<SearchEvent>() {
         @Override
         public SearchEvent createFromParcel(Parcel in) {
