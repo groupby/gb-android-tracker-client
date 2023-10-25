@@ -12,7 +12,7 @@ import com.groupby.tracker.model.Event;
 import com.groupby.tracker.model.Experiments;
 import com.groupby.tracker.model.Metadata;
 import com.groupby.tracker.model.Search;
-import com.groupby.tracker.model.SearchEve;
+import com.groupby.tracker.model.ManualSearchEvent;
 
 
 /**
@@ -37,7 +37,7 @@ public class ManualSearchBeacon implements Parcelable
 
     @SerializedName("event")
     @Expose
-    private SearchEve event;
+    private ManualSearchEvent event;
     /**
      * metadata component
      * <p>
@@ -117,7 +117,7 @@ public class ManualSearchBeacon implements Parcelable
     ;
 
     protected ManualSearchBeacon(android.os.Parcel in) {
-        this.event  = ((SearchEve) in.readValue((SearchEve.class.getClassLoader())));
+        this.event  = ((ManualSearchEvent) in.readValue((ManualSearchEvent.class.getClassLoader())));
         in.readList(this.metadata, (Metadata.class.getClassLoader()));
         in.readList(this.experiments, (Experiments.class.getClassLoader()));
         this.time = ((Date) in.readValue((Date.class.getClassLoader())));
@@ -139,7 +139,7 @@ public class ManualSearchBeacon implements Parcelable
      * @param experiments
      * @param event
      */
-    public ManualSearchBeacon(SearchEve event, List<Metadata> metadata, List<Experiments> experiments) {
+    public ManualSearchBeacon(ManualSearchEvent event, List<Metadata> metadata, List<Experiments> experiments) {
         super();
         this.event = event;
         this.metadata = metadata;
@@ -151,7 +151,7 @@ public class ManualSearchBeacon implements Parcelable
      * (Required)
      * 
      */
-    public SearchEve getEvent() {
+    public ManualSearchEvent getEvent() {
         return event;
     }
 
@@ -160,7 +160,7 @@ public class ManualSearchBeacon implements Parcelable
      * (Required)
      * 
      */
-    public void setEvent(SearchEve event) {
+    public void setEvent(ManualSearchEvent event) {
         this.event = event;
     }
 
