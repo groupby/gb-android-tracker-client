@@ -19,11 +19,11 @@ public class ManualSearchEvent implements Parcelable {
     @Expose
     private Search search;
 
-    public void setgoogleAttributionToken(String googleAttributionToken) {
+    public void setGoogleAttributionToken(String googleAttributionToken) {
         this.googleAttributionToken = googleAttributionToken;
     }
 
-    public void SetSearch(Search search) {
+    public void setSearch(Search search) {
         this.search = search;
     }
 
