@@ -2,8 +2,6 @@
 package com.groupby.tracker.model;
 
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
-import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,22 +10,17 @@ import com.google.gson.annotations.SerializedName;
  * price component
  * <p>
  * Contains data about the price of a product in event types that involve products.
- *
  */
-public class Price implements Parcelable
-{
+public class Price implements Parcelable {
 
     /**
-     *
      * (Required)
-     *
      */
     @SerializedName("onSale")
     @Expose
     private Boolean onSale;
     /**
      * The regular price of the product (when it is not on sale).
-     *
      */
     @SerializedName("regular")
     @Expose
@@ -35,7 +28,6 @@ public class Price implements Parcelable
     /**
      * The price the customer would pay (if viewing) or paid (for order events) for the product.
      * (Required)
-     *
      */
     @SerializedName("actual")
     @Expose
@@ -43,17 +35,12 @@ public class Price implements Parcelable
     /**
      * The ISO 4217 code of the currency for the product.Instead of patterns here for the ISO 4217 code, we're allowing any three character string that way customer using any currency can be onboarded even if we aren't aware of the currency code as we develop this. This property is intentionally part of this submodel instead of the price submodel so we can minimize repeated code in the price submodel.
      * (Required)
-     *
      */
     @SerializedName("currency")
     @Expose
     private String currency;
     public final static Creator<Price> CREATOR = new Creator<Price>() {
 
-
-        @SuppressWarnings({
-                "unchecked"
-        })
         public Price createFromParcel(android.os.Parcel in) {
             return new Price(in);
         }
@@ -62,8 +49,7 @@ public class Price implements Parcelable
             return (new Price[size]);
         }
 
-    }
-            ;
+    };
 
     protected Price(android.os.Parcel in) {
         this.onSale = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
@@ -74,13 +60,11 @@ public class Price implements Parcelable
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public Price() {
     }
 
     /**
-     *
      * @param actual
      * @param onSale
      * @param currency
@@ -95,18 +79,14 @@ public class Price implements Parcelable
     }
 
     /**
-     *
      * (Required)
-     *
      */
     public Boolean getOnSale() {
         return onSale;
     }
 
     /**
-     *
      * (Required)
-     *
      */
     public void setOnSale(Boolean onSale) {
         this.onSale = onSale;
@@ -114,7 +94,6 @@ public class Price implements Parcelable
 
     /**
      * The regular price of the product (when it is not on sale).
-     *
      */
     public String getRegular() {
         return regular;
@@ -122,7 +101,6 @@ public class Price implements Parcelable
 
     /**
      * The regular price of the product (when it is not on sale).
-     *
      */
     public void setRegular(String regular) {
         this.regular = regular;
@@ -131,7 +109,6 @@ public class Price implements Parcelable
     /**
      * The price the customer would pay (if viewing) or paid (for order events) for the product.
      * (Required)
-     *
      */
     public String getActual() {
         return actual;
@@ -140,7 +117,6 @@ public class Price implements Parcelable
     /**
      * The price the customer would pay (if viewing) or paid (for order events) for the product.
      * (Required)
-     *
      */
     public void setActual(String actual) {
         this.actual = actual;
@@ -149,7 +125,6 @@ public class Price implements Parcelable
     /**
      * The ISO 4217 code of the currency for the product.Instead of patterns here for the ISO 4217 code, we're allowing any three character string that way customer using any currency can be onboarded even if we aren't aware of the currency code as we develop this. This property is intentionally part of this submodel instead of the price submodel so we can minimize repeated code in the price submodel.
      * (Required)
-     *
      */
     public String getCurrency() {
         return currency;
@@ -158,7 +133,6 @@ public class Price implements Parcelable
     /**
      * The ISO 4217 code of the currency for the product.Instead of patterns here for the ISO 4217 code, we're allowing any three character string that way customer using any currency can be onboarded even if we aren't aware of the currency code as we develop this. This property is intentionally part of this submodel instead of the price submodel so we can minimize repeated code in the price submodel.
      * (Required)
-     *
      */
     public void setCurrency(String currency) {
         this.currency = currency;
@@ -170,22 +144,22 @@ public class Price implements Parcelable
         sb.append(Price.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("onSale");
         sb.append('=');
-        sb.append(((this.onSale == null)?"<null>":this.onSale));
+        sb.append(((this.onSale == null) ? "<null>" : this.onSale));
         sb.append(',');
         sb.append("regular");
         sb.append('=');
-        sb.append(((this.regular == null)?"<null>":this.regular));
+        sb.append(((this.regular == null) ? "<null>" : this.regular));
         sb.append(',');
         sb.append("actual");
         sb.append('=');
-        sb.append(((this.actual == null)?"<null>":this.actual));
+        sb.append(((this.actual == null) ? "<null>" : this.actual));
         sb.append(',');
         sb.append("currency");
         sb.append('=');
-        sb.append(((this.currency == null)?"<null>":this.currency));
+        sb.append(((this.currency == null) ? "<null>" : this.currency));
         sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
         } else {
             sb.append(']');
         }
@@ -195,10 +169,10 @@ public class Price implements Parcelable
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.onSale == null)? 0 :this.onSale.hashCode()));
-        result = ((result* 31)+((this.actual == null)? 0 :this.actual.hashCode()));
-        result = ((result* 31)+((this.currency == null)? 0 :this.currency.hashCode()));
-        result = ((result* 31)+((this.regular == null)? 0 :this.regular.hashCode()));
+        result = ((result * 31) + ((this.onSale == null) ? 0 : this.onSale.hashCode()));
+        result = ((result * 31) + ((this.actual == null) ? 0 : this.actual.hashCode()));
+        result = ((result * 31) + ((this.currency == null) ? 0 : this.currency.hashCode()));
+        result = ((result * 31) + ((this.regular == null) ? 0 : this.regular.hashCode()));
         return result;
     }
 
@@ -211,7 +185,7 @@ public class Price implements Parcelable
             return false;
         }
         Price rhs = ((Price) other);
-        return (((((this.onSale == rhs.onSale)||((this.onSale!= null)&&this.onSale.equals(rhs.onSale)))&&((this.actual == rhs.actual)||((this.actual!= null)&&this.actual.equals(rhs.actual))))&&((this.currency == rhs.currency)||((this.currency!= null)&&this.currency.equals(rhs.currency))))&&((this.regular == rhs.regular)||((this.regular!= null)&&this.regular.equals(rhs.regular))));
+        return (((((this.onSale == rhs.onSale) || ((this.onSale != null) && this.onSale.equals(rhs.onSale))) && ((this.actual == rhs.actual) || ((this.actual != null) && this.actual.equals(rhs.actual)))) && ((this.currency == rhs.currency) || ((this.currency != null) && this.currency.equals(rhs.currency)))) && ((this.regular == rhs.regular) || ((this.regular != null) && this.regular.equals(rhs.regular))));
     }
 
     public void writeToParcel(android.os.Parcel dest, int flags) {
@@ -222,7 +196,7 @@ public class Price implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

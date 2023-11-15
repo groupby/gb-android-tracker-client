@@ -32,9 +32,19 @@ public class Search implements Parcelable {
     public Search createFromParcel(android.os.Parcel in) {
         return new Search(in);
     }
+
     public Search(){
 
     }
+
+    public Search(String query, long totalRecordCount, PageInfo pageInfo, List<Record> records, List<SelectedNavigation> selectedNavigation) {
+        this.query = query;
+        this.totalRecordCount = totalRecordCount;
+        this.pageInfo = pageInfo;
+        this.records = records;
+        this.selectedNavigation = selectedNavigation;
+    }
+
     private String query;
     private long totalRecordCount;
     private PageInfo pageInfo;

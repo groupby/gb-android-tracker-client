@@ -1,33 +1,30 @@
 
 package com.groupby.tracker;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.groupby.tracker.model.AddToCartEvent;
 import com.groupby.tracker.model.Experiments;
 import com.groupby.tracker.model.Metadata;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 
 /**
  * addToCart event sent directly from a native app client
  * <p>
  * An addToCart event for the native app client type (as opposed to other client types like web browsers) sent directly from the client (as opposed to sent from a server serving the client). This event is used when the shopper adds a product to their cart. Note that the only client officially supported for sending GroupBy this data is the official GroupBy native app SDK for the respective platform (Android, iOS, etc). A backwards incompatible change may be made to a major version of this schema if the change would not be backwards incompatible with respect to correct usage of the corresponding major version of the native app SDK.
- * 
  */
-public class AddToCartBeacon implements Parcelable
-{
+public class AddToCartBeacon implements Parcelable {
 
     /**
      * addToCart event component
      * <p>
      * The event data for an addToCart event.
      * (Required)
-     * 
      */
     @SerializedName("event")
     @Expose
@@ -37,7 +34,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types.
      * Omit if there are no metadata items you want to send in the beacon. Limit of 20 metadata items per beacon.
-     * 
      */
     @SerializedName("metadata")
     @Expose
@@ -47,7 +43,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has.
      * Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics.
-     * 
      */
     @SerializedName("experiments")
     @Expose
@@ -58,7 +53,6 @@ public class AddToCartBeacon implements Parcelable
      * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid.
      * GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
      * (Required)
-     * 
      */
     @SerializedName("time")
     @Expose
@@ -68,7 +62,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Contains data about the GroupBy customer sending the beacons.
      * (Required)
-     * 
      */
     @SerializedName("customer")
     @Expose
@@ -78,7 +71,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * The data used to anonymously track a shopper. See property descriptions for details on how this is anonymous tracking as opposed to tracking that infringes on the privacy of the shopper.
      * (Required)
-     * 
      */
     @SerializedName("shopper")
     @Expose
@@ -88,7 +80,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Contains data about the client sending the beacon when the client is a native app.
      * (Required)
-     * 
      */
     @SerializedName("client")
     @Expose
@@ -96,10 +87,6 @@ public class AddToCartBeacon implements Parcelable
 
     public final static Creator<AddToCartBeacon> CREATOR = new Creator<AddToCartBeacon>() {
 
-
-        @SuppressWarnings({
-            "unchecked"
-        })
         public AddToCartBeacon createFromParcel(android.os.Parcel in) {
             return new AddToCartBeacon(in);
         }
@@ -108,8 +95,7 @@ public class AddToCartBeacon implements Parcelable
             return (new AddToCartBeacon[size]);
         }
 
-    }
-    ;
+    };
 
     protected AddToCartBeacon(android.os.Parcel in) {
         this.event = ((AddToCartEvent) in.readValue((AddToCartEvent.class.getClassLoader())));
@@ -123,13 +109,11 @@ public class AddToCartBeacon implements Parcelable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public AddToCartBeacon() {
     }
 
     /**
-     * 
      * @param metadata
      * @param experiments
      * @param event
@@ -146,7 +130,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * The event data for an addToCart event.
      * (Required)
-     * 
      */
     public AddToCartEvent getEvent() {
         return event;
@@ -157,7 +140,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * The event data for an addToCart event.
      * (Required)
-     * 
      */
     public void setEvent(AddToCartEvent event) {
         this.event = event;
@@ -168,7 +150,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types.
      * Omit if there are no metadata items you want to send in the beacon. Limit of 20 metadata items per beacon.
-     * 
      */
     public List<Metadata> getMetadata() {
         return metadata;
@@ -179,7 +160,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * The metadata component. Miscellaneous data that a GroupBy customer may want to include in their beacons. This is an advanced feature that is only used when the customer is talking to their Customer Success rep, who has instructed them to add certain metadata to their beacons. It is used in all event types.
      * Omit if there are no metadata items you want to send in the beacon. Limit of 20 metadata items per beacon.
-     * 
      */
     public void setMetadata(List<Metadata> metadata) {
         this.metadata = metadata;
@@ -190,7 +170,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has.
      * Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics.
-     * 
      */
     public List<Experiments> getExperiments() {
         return experiments;
@@ -201,7 +180,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Used when a GroupBy customer is performing an A/B test. Can be used for A/B testing different configurations of GroupBy services but can also be used for A/B testing different configurations for anything the customer has.
      * Omit the field if you are not running any A/B tests or if you are running A/B tests but do not wish to beacon them to GroupBy to explore them in GroupBy Analytics.
-     * 
      */
     public void setExperiments(List<Experiments> experiments) {
         this.experiments = experiments;
@@ -213,7 +191,6 @@ public class AddToCartBeacon implements Parcelable
      * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid.
      * GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
      * (Required)
-     * 
      */
     protected Date getTime() {
         return time;
@@ -225,7 +202,6 @@ public class AddToCartBeacon implements Parcelable
      * The time the event occured, in RFC3339 format. Preferably, with at least millisecond accuracy, but any RFC3339 format string is valid.
      * GroupBy collects this from the client instead of the server to allow us to differentiate between the time an event occurred and the time we eventually receive it.
      * (Required)
-     * 
      */
     protected void setTime(Date time) {
         this.time = time;
@@ -236,7 +212,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Contains data about the GroupBy customer sending the beacons.
      * (Required)
-     * 
      */
     protected Customer getCustomer() {
         return customer;
@@ -247,7 +222,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Contains data about the GroupBy customer sending the beacons.
      * (Required)
-     * 
      */
     protected void setCustomer(Customer customer) {
         this.customer = customer;
@@ -258,7 +232,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * The data used to anonymously track a shopper. See property descriptions for details on how this is anonymous tracking as opposed to tracking that infringes on the privacy of the shopper.
      * (Required)
-     * 
      */
     protected ShopperTracking getShopper() {
         return shopper;
@@ -269,7 +242,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * The data used to anonymously track a shopper. See property descriptions for details on how this is anonymous tracking as opposed to tracking that infringes on the privacy of the shopper.
      * (Required)
-     * 
      */
     protected void setShopper(ShopperTracking shopper) {
         this.shopper = shopper;
@@ -280,7 +252,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Contains data about the client sending the beacon when the client is a native app.
      * (Required)
-     * 
      */
     protected NativeAppClient getClient() {
         return client;
@@ -291,7 +262,6 @@ public class AddToCartBeacon implements Parcelable
      * <p>
      * Contains data about the client sending the beacon when the client is a native app.
      * (Required)
-     * 
      */
     protected void setClient(NativeAppClient client) {
         this.client = client;
@@ -303,34 +273,34 @@ public class AddToCartBeacon implements Parcelable
         sb.append(AddToCartBeacon.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("event");
         sb.append('=');
-        sb.append(((this.event == null)?"<null>":this.event));
+        sb.append(((this.event == null) ? "<null>" : this.event));
         sb.append(',');
         sb.append("metadata");
         sb.append('=');
-        sb.append(((this.metadata == null)?"<null>":this.metadata));
+        sb.append(((this.metadata == null) ? "<null>" : this.metadata));
         sb.append(',');
         sb.append("experiments");
         sb.append('=');
-        sb.append(((this.experiments == null)?"<null>":this.experiments));
+        sb.append(((this.experiments == null) ? "<null>" : this.experiments));
         sb.append(',');
         sb.append("time");
         sb.append('=');
-        sb.append(((this.time == null)?"<null>":this.time));
+        sb.append(((this.time == null) ? "<null>" : this.time));
         sb.append(',');
         sb.append("customer");
         sb.append('=');
-        sb.append(((this.customer == null)?"<null>":this.customer));
+        sb.append(((this.customer == null) ? "<null>" : this.customer));
         sb.append(',');
         sb.append("shopper");
         sb.append('=');
-        sb.append(((this.shopper == null)?"<null>":this.shopper));
+        sb.append(((this.shopper == null) ? "<null>" : this.shopper));
         sb.append(',');
         sb.append("client");
         sb.append('=');
-        sb.append(((this.client == null)?"<null>":this.client));
+        sb.append(((this.client == null) ? "<null>" : this.client));
         sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
         } else {
             sb.append(']');
         }
@@ -340,13 +310,13 @@ public class AddToCartBeacon implements Parcelable
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.metadata == null)? 0 :this.metadata.hashCode()));
-        result = ((result* 31)+((this.shopper == null)? 0 :this.shopper.hashCode()));
-        result = ((result* 31)+((this.experiments == null)? 0 :this.experiments.hashCode()));
-        result = ((result* 31)+((this.client == null)? 0 :this.client.hashCode()));
-        result = ((result* 31)+((this.time == null)? 0 :this.time.hashCode()));
-        result = ((result* 31)+((this.event == null)? 0 :this.event.hashCode()));
-        result = ((result* 31)+((this.customer == null)? 0 :this.customer.hashCode()));
+        result = ((result * 31) + ((this.metadata == null) ? 0 : this.metadata.hashCode()));
+        result = ((result * 31) + ((this.shopper == null) ? 0 : this.shopper.hashCode()));
+        result = ((result * 31) + ((this.experiments == null) ? 0 : this.experiments.hashCode()));
+        result = ((result * 31) + ((this.client == null) ? 0 : this.client.hashCode()));
+        result = ((result * 31) + ((this.time == null) ? 0 : this.time.hashCode()));
+        result = ((result * 31) + ((this.event == null) ? 0 : this.event.hashCode()));
+        result = ((result * 31) + ((this.customer == null) ? 0 : this.customer.hashCode()));
         return result;
     }
 
@@ -359,7 +329,7 @@ public class AddToCartBeacon implements Parcelable
             return false;
         }
         AddToCartBeacon rhs = ((AddToCartBeacon) other);
-        return ((((((((this.metadata == rhs.metadata)||((this.metadata!= null)&&this.metadata.equals(rhs.metadata)))&&((this.shopper == rhs.shopper)||((this.shopper!= null)&&this.shopper.equals(rhs.shopper))))&&((this.experiments == rhs.experiments)||((this.experiments!= null)&&this.experiments.equals(rhs.experiments))))&&((this.client == rhs.client)||((this.client!= null)&&this.client.equals(rhs.client))))&&((this.time == rhs.time)||((this.time!= null)&&this.time.equals(rhs.time))))&&((this.event == rhs.event)||((this.event!= null)&&this.event.equals(rhs.event))))&&((this.customer == rhs.customer)||((this.customer!= null)&&this.customer.equals(rhs.customer))));
+        return ((((((((this.metadata == rhs.metadata) || ((this.metadata != null) && this.metadata.equals(rhs.metadata))) && ((this.shopper == rhs.shopper) || ((this.shopper != null) && this.shopper.equals(rhs.shopper)))) && ((this.experiments == rhs.experiments) || ((this.experiments != null) && this.experiments.equals(rhs.experiments)))) && ((this.client == rhs.client) || ((this.client != null) && this.client.equals(rhs.client)))) && ((this.time == rhs.time) || ((this.time != null) && this.time.equals(rhs.time)))) && ((this.event == rhs.event) || ((this.event != null) && this.event.equals(rhs.event)))) && ((this.customer == rhs.customer) || ((this.customer != null) && this.customer.equals(rhs.customer))));
     }
 
     public void writeToParcel(android.os.Parcel dest, int flags) {
@@ -373,7 +343,7 @@ public class AddToCartBeacon implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

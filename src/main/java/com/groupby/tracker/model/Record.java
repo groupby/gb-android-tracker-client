@@ -4,6 +4,14 @@ public class Record {
     private String id;
     private String title;
 
+    public Record() {
+    }
+
+    public Record(String id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     public String getId() {
         return id;
     }
