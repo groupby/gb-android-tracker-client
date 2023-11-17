@@ -1,27 +1,24 @@
 
 package com.groupby.tracker;
 
-import java.util.HashMap;
-import java.util.Map;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * Native app client component
  * <p>
  * Contains data about the client sending the beacon when the client is a native app.
- * 
  */
-class NativeAppClient implements Parcelable
-{
+class NativeAppClient implements Parcelable {
 
     /**
      * The native app platform.We need this to differentiate between Android and iOS beacons for analytics purposes.
      * (Required)
-     * 
      */
     @SerializedName("platform")
     @Expose
@@ -29,7 +26,6 @@ class NativeAppClient implements Parcelable
     /**
      * The device user's language preference, expressed as a language code. Ex. "en-US".
      * (Required)
-     * 
      */
     @SerializedName("lang")
     @Expose
@@ -37,7 +33,6 @@ class NativeAppClient implements Parcelable
     /**
      * The model of the device. Ex. "Pixel 5" or "iOS".
      * (Required)
-     * 
      */
     @SerializedName("model")
     @Expose
@@ -45,17 +40,12 @@ class NativeAppClient implements Parcelable
     /**
      * An identifier for the native app. For iOS, see https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/AppID.html. For Android, see https://developer.android.com/studio/build/configure-app-module. This isn't required because it doesn't stop GroupBy from being able to use native app beacons to improve Search and Recommendations, but it does provide a dimension in Analytics if provided.
      * (Required)
-     *
      */
     @SerializedName("appId")
     @Expose
     private String appId;
     public final static Creator<NativeAppClient> CREATOR = new Creator<NativeAppClient>() {
 
-
-        @SuppressWarnings({
-            "unchecked"
-        })
         public NativeAppClient createFromParcel(android.os.Parcel in) {
             return new NativeAppClient(in);
         }
@@ -64,8 +54,7 @@ class NativeAppClient implements Parcelable
             return (new NativeAppClient[size]);
         }
 
-    }
-    ;
+    };
 
     protected NativeAppClient(android.os.Parcel in) {
         this.platform = ((NativeAppClient.Platform) in.readValue((Platform.class.getClassLoader())));
@@ -76,13 +65,11 @@ class NativeAppClient implements Parcelable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public NativeAppClient() {
     }
 
     /**
-     * 
      * @param model
      * @param lang
      * @param platform
@@ -98,7 +85,6 @@ class NativeAppClient implements Parcelable
     /**
      * The native app platform.We need this to differentiate between Android and iOS beacons for analytics purposes.
      * (Required)
-     * 
      */
     public NativeAppClient.Platform getPlatform() {
         return platform;
@@ -107,7 +93,6 @@ class NativeAppClient implements Parcelable
     /**
      * The native app platform.We need this to differentiate between Android and iOS beacons for analytics purposes.
      * (Required)
-     * 
      */
     public void setPlatform(NativeAppClient.Platform platform) {
         this.platform = platform;
@@ -116,7 +101,6 @@ class NativeAppClient implements Parcelable
     /**
      * The device user's language preference, expressed as a language code. Ex. "en-US".
      * (Required)
-     * 
      */
     public String getLang() {
         return lang;
@@ -125,7 +109,6 @@ class NativeAppClient implements Parcelable
     /**
      * The device user's language preference, expressed as a language code. Ex. "en-US".
      * (Required)
-     * 
      */
     public void setLang(String lang) {
         this.lang = lang;
@@ -134,7 +117,6 @@ class NativeAppClient implements Parcelable
     /**
      * The model of the device. Ex. "Pixel 5" or "iOS".
      * (Required)
-     * 
      */
     public String getModel() {
         return model;
@@ -143,7 +125,6 @@ class NativeAppClient implements Parcelable
     /**
      * The model of the device. Ex. "Pixel 5" or "iOS".
      * (Required)
-     * 
      */
     public void setModel(String model) {
         this.model = model;
@@ -152,7 +133,6 @@ class NativeAppClient implements Parcelable
     /**
      * An identifier for the native app. For iOS, see https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/AppID.html. For Android, see https://developer.android.com/studio/build/configure-app-module. This isn't required because it doesn't stop GroupBy from being able to use native app beacons to improve Search and Recommendations, but it does provide a dimension in Analytics if provided.
      * (Required)
-     *
      */
     public String getAppId() {
         return appId;
@@ -161,7 +141,6 @@ class NativeAppClient implements Parcelable
     /**
      * An identifier for the native app. For iOS, see https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/AppID.html. For Android, see https://developer.android.com/studio/build/configure-app-module. This isn't required because it doesn't stop GroupBy from being able to use native app beacons to improve Search and Recommendations, but it does provide a dimension in Analytics if provided.
      * (Required)
-     *
      */
     public void setAppId(String appId) {
         this.appId = appId;
@@ -173,22 +152,22 @@ class NativeAppClient implements Parcelable
         sb.append(NativeAppClient.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("platform");
         sb.append('=');
-        sb.append(((this.platform == null)?"<null>":this.platform));
+        sb.append(((this.platform == null) ? "<null>" : this.platform));
         sb.append(',');
         sb.append("lang");
         sb.append('=');
-        sb.append(((this.lang == null)?"<null>":this.lang));
+        sb.append(((this.lang == null) ? "<null>" : this.lang));
         sb.append(',');
         sb.append("model");
         sb.append('=');
-        sb.append(((this.model == null)?"<null>":this.model));
+        sb.append(((this.model == null) ? "<null>" : this.model));
         sb.append(',');
         sb.append("appId");
         sb.append('=');
-        sb.append(((this.appId == null)?"<null>":this.model));
+        sb.append(((this.appId == null) ? "<null>" : this.model));
         sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
         } else {
             sb.append(']');
         }
@@ -198,10 +177,10 @@ class NativeAppClient implements Parcelable
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.model == null)? 0 :this.model.hashCode()));
-        result = ((result* 31)+((this.lang == null)? 0 :this.lang.hashCode()));
-        result = ((result* 31)+((this.appId == null)? 0 :this.appId.hashCode()));
-        result = ((result* 31)+((this.platform == null)? 0 :this.platform.hashCode()));
+        result = ((result * 31) + ((this.model == null) ? 0 : this.model.hashCode()));
+        result = ((result * 31) + ((this.lang == null) ? 0 : this.lang.hashCode()));
+        result = ((result * 31) + ((this.appId == null) ? 0 : this.appId.hashCode()));
+        result = ((result * 31) + ((this.platform == null) ? 0 : this.platform.hashCode()));
         return result;
     }
 
@@ -214,7 +193,7 @@ class NativeAppClient implements Parcelable
             return false;
         }
         NativeAppClient rhs = ((NativeAppClient) other);
-        return ((((this.model == rhs.model)||((this.model!= null)&&this.model.equals(rhs.model)))&&((this.lang == rhs.lang)||((this.lang!= null)&&this.lang.equals(rhs.lang))))&&((this.appId == rhs.appId)||((this.appId!= null)&&this.appId.equals(rhs.appId)))&&((this.platform == rhs.platform)||((this.platform!= null)&&this.platform.equals(rhs.platform))));
+        return ((((this.model == rhs.model) || ((this.model != null) && this.model.equals(rhs.model))) && ((this.lang == rhs.lang) || ((this.lang != null) && this.lang.equals(rhs.lang)))) && ((this.appId == rhs.appId) || ((this.appId != null) && this.appId.equals(rhs.appId))) && ((this.platform == rhs.platform) || ((this.platform != null) && this.platform.equals(rhs.platform))));
     }
 
     public void writeToParcel(android.os.Parcel dest, int flags) {
@@ -225,13 +204,12 @@ class NativeAppClient implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 
     /**
      * The native app platform.We need this to differentiate between Android and iOS beacons for analytics purposes.
-     * 
      */
     public enum Platform {
 
@@ -243,7 +221,7 @@ class NativeAppClient implements Parcelable
         private final static Map<String, NativeAppClient.Platform> CONSTANTS = new HashMap<String, NativeAppClient.Platform>();
 
         static {
-            for (NativeAppClient.Platform c: values()) {
+            for (NativeAppClient.Platform c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }

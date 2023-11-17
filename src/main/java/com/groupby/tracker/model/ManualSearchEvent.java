@@ -10,8 +10,17 @@ public class ManualSearchEvent implements Parcelable {
         this.googleAttributionToken = ((String) in.readValue((String.class.getClassLoader())));
     }
     public ManualSearchEvent(){
-
     }
+
+    public ManualSearchEvent(Search search) {
+        this.search = search;
+    }
+
+    public ManualSearchEvent(Search search, String googleAttributionToken) {
+        this.search = search;
+        this.googleAttributionToken = googleAttributionToken;
+    }
+
     @SerializedName("googleAttributionToken")
     @Expose
     private String googleAttributionToken;

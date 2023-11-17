@@ -16,7 +16,8 @@ public class GbException extends Exception {
     private GbError error = null;
     private JSON json;
 
-    public GbException() {}
+    public GbException() {
+    }
 
     public GbException(Throwable throwable) {
         super(throwable);
@@ -32,10 +33,9 @@ public class GbException extends Exception {
         this.responseHeaders = responseHeaders;
         this.responseBody = responseBody;
 
-        if (this.code == 400)
-        {
+        if (this.code == 400) {
             json = new JSON();
-            Type gbErrorReturnType = new TypeToken<GbError>(){}.getType();
+            Type gbErrorReturnType = new TypeToken<GbError>() {}.getType();
             this.error = this.deserialize(responseBody, gbErrorReturnType);
         }
     }
@@ -62,10 +62,10 @@ public class GbException extends Exception {
         this.responseHeaders = responseHeaders;
         this.responseBody = responseBody;
 
-        if (this.code == 400)
-        {
+        if (this.code == 400) {
             json = new JSON();
-            Type gbErrorReturnType = new TypeToken<GbError>(){}.getType();
+            Type gbErrorReturnType = new TypeToken<GbError>() {
+            }.getType();
             this.error = this.deserialize(responseBody, gbErrorReturnType);
         }
     }
@@ -110,16 +110,15 @@ public class GbException extends Exception {
      * Deserialize response body to Java object, according to the return type and
      * the Content-Type response header.
      *
-     * @param <T> Type
-     * @param respBody HTTP response body
+     * @param <T>        Type
+     * @param respBody   HTTP response body
      * @param returnType The type of the Java object
      * @return The deserialized Java object
      * @throws GbException If fail to deserialize response body, i.e. cannot read response body
-     *   or the Content-Type of the response is not supported.
+     *                     or the Content-Type of the response is not supported.
      */
-    @SuppressWarnings("unchecked")
     public <T> T deserialize(String respBody, Type returnType) {
-        if (respBody == null || "".equals(respBody)) {
+        if (respBody == null || respBody.isEmpty()) {
             return null;
         }
 
