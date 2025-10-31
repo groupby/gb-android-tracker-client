@@ -42,6 +42,9 @@ An example of a method you can call to send an event is the `sendViewProductEven
 
 See [Sending events](docs/sending_events.md) for more details.
 
+Note on Conversational Commerce origin:
+- To attribute autoSearch events to R2 Conversational Commerce, set `event.setOrigin(AutoSearchEvent.Origin.CONVERSATION)` and use the conversational response ID as `searchId`. See the autoSearch guide for a full example.
+
 ## Setting login status
 
 Login status describes whether the shopper is logged in or not when the event occurs. With this information set in the tracker GroupBy can anonymously track shoppers across their devices, not just anonymously track them in the Android app.

@@ -156,7 +156,9 @@ public class AutoSearchEvent implements Parcelable {
         @SerializedName("sayt")
         SAYT("sayt"),
         @SerializedName("navigation")
-        NAVIGATION("navigation");
+        NAVIGATION("navigation"),
+        @SerializedName("conversation")
+        CONVERSATION("conversation");
         private final String value;
         private final static Map<String, AutoSearchEvent.Origin> CONSTANTS = new HashMap<String, AutoSearchEvent.Origin>();
 

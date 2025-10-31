@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Build;
@@ -24,6 +23,9 @@ import com.groupby.tracker.model.Login;
 import com.groupby.tracker.model.Metadata;
 import com.groupby.tracker.model.Price;
 import com.groupby.tracker.model.Product;
+import com.groupby.tracker.model.AutoSearchEvent;
+
+import java.util.UUID;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -113,5 +115,23 @@ public class GbTrackerUnitTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void autoSearchEvent_conversation_origin_serializes()
+    {
+        AutoSearchEvent event = new AutoSearchEvent();
+        UUID id = UUID.fromString("c8a16b67-d3dd-49a8-b49c-68ed18febc3f");
+        event.setSearchId(id);
+        event.setOrigin(AutoSearchEvent.Origin.CONVERSATION);
+
+        AutoSearchBeacon beacon = new AutoSearchBeacon();
+        beacon.setEvent(event);
+
+        JSON json = new JSON();
+        String payload = json.serialize(beacon);
+
+        assertTrue("payload should contain origin conversation", payload.contains("\"origin\":\"conversation\""));
+        assertTrue("payload should contain the searchId", payload.contains(id.toString()));
     }
 }
