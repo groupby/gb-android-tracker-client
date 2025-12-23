@@ -1,8 +1,8 @@
-# GroupBy Tracker Client for Android
+# Rezolve Tracker Client for Android
 
-This is the Android SDK used to send beacons to GroupBy.
+This is the Android SDK used to send beacons to Rezolve.
 
-Like other GroupBy beacon SDKs, it allows you to send a beacon representing a shopping event to GroupBy whenever that event occurs. This causes anonymous information about the shopper and the search results and products they interact with to be saved in GroupBy's systems to power GroupBy's platform.
+Like other Rezolve beacon SDKs, it allows you to send a beacon representing a shopping event to Rezolve whenever that event occurs. This causes anonymous information about the shopper and the search results and products they interact with to be saved in Rezolve's systems to power Rezolve's platform.
 
 Examples of platform components enhanced by beacons:
 
@@ -44,7 +44,7 @@ See [Sending events](docs/sending_events.md) for more details.
 
 ## Setting login status
 
-Login status describes whether the shopper is logged in or not when the event occurs. With this information set in the tracker GroupBy can anonymously track shoppers across their devices, not just anonymously track them in the Android app.
+Login status describes whether the shopper is logged in or not when the event occurs. With this information set in the tracker Rezolve can anonymously track shoppers across their devices, not just anonymously track them in the Android app.
 
 You can set the login status as you create the tracker instance and by mutating an existing tracker instance throughout the lifecycle of the app.
 
@@ -74,18 +74,18 @@ See [Validation](docs/validation.md) for more details.
 
 ## Event types
 
-The following event types are supported in the client. The "main four" event types are what GroupBy considers to be a minimum required beacon implementation in your Android app:
+The following event types are supported in the client. The "main four" event types are what Rezolve considers to be a minimum required beacon implementation in your Android app:
 
 | Event type | In "main four"? | Description | Details |
 | ---------- | --------------- | ----------- | ------- |
-| autoSearch  | Yes | After performing a search using a GroupBy search API, this is used for sending details of the search to GroupBy's beacon API. The details are sent from the web browser using this event instead of being retrieved internally by GroupBy so that client tracking works correctly and aligns with the rest of the event types which must be sent from the client. | [autoSearch](docs/autoSearch.md)
+| autoSearch  | Yes | After performing a search using a Rezolve search API, this is used for sending details of the search to Rezolve's beacon API. The details are sent from the web browser using this event instead of being retrieved internally by Rezolve so that client tracking works correctly and aligns with the rest of the event types which must be sent from the client. | [autoSearch](docs/autoSearch.md)
 | viewProduct  | Yes | For sending details of which product (or SKU within a product) the shopper is viewing details of. | [viewProduct](docs/viewProduct.md)
 | addToCart | Yes | For sending details of which products (or SKUs within products) the shopper is adding to their cart. | [addToCart](docs/addToCart.md)
 | removeFromCart | No | For sending details of which products (or SKUs within products) the shopper is removing from their cart. | [removeFromCart](docs/removeFromCart.md)
 | order | Yes | For sending details of which products (or SKUs within products) the shopper is ordering. | [order](docs/order.md)
-| recImpression | No | For sending details of which products (or SKUs within products) the shopper is viewing on a page where you're rendering recommendations from a GroupBy recommendation API. | [recImpression](docs/recImpression.md)
+| recImpression | No | For sending details of which products (or SKUs within products) the shopper is viewing on a page where you're rendering recommendations from a Rezolve recommendation API. | [recImpression](docs/recImpression.md)
 
-When at least the main four event types have been implemented, session level insights become available instead of just event level insights. For example, you can get a breakdown via GroupBy's analytics of which search terms are leading your shoppers to the products they're buying.
+When at least the main four event types have been implemented, session level insights become available instead of just event level insights. For example, you can get a breakdown via Rezolve's analytics of which search terms are leading your shoppers to the products they're buying.
 
 ## Including metadata and experiments in events
 
@@ -93,7 +93,7 @@ When at least the main four event types have been implemented, session level ins
 
 Metadata is miscellaneous key value pair data not part of each event's schema that you can include in each beacon you send.
 
-When you include metadata in beacons you send, you extend GroupBy's analytics by enabling new dimensions.
+When you include metadata in beacons you send, you extend Rezolve's analytics by enabling new dimensions.
 
 See [Metadata](docs/metadata.md) for more details.
 
@@ -101,21 +101,21 @@ See [Metadata](docs/metadata.md) for more details.
 
 Experiments are key value pairs of data not part of each event's schema that you can in each beacon you send.
 
-When you are running an A/B test, including details of the experiments in your A/B testing allows you to extend GroupBy's analytics by using your experiment as a a new dimension in analytics. For example, you can measure revenue for each bucket in your experiment.
+When you are running an A/B test, including details of the experiments in your A/B testing allows you to extend Rezolve's analytics by using your experiment as a a new dimension in analytics. For example, you can measure revenue for each bucket in your experiment.
 
 See [Experiments](docs/experiments.md) for more details.
 
 ## Shopper tracking
 
-Shoppers are tracked anonymously. GroupBy will know when a shopper returns but will not know who the shopper is.
+Shoppers are tracked anonymously. Rezolve will know when a shopper returns but will not know who the shopper is.
 
 VisitorId is a UUID used to anonymously track the user. This ID is not tied to any external systems and can only be used to track activity within the same app install. VisitorId has an expiry time of 1 year since the last time the shopper visited. After that, a new ID will be generated.
 
-This shared preferences is stored in a file named com.groupby.tracker, separated from other preferences used by the app.
+This shared preferences is stored in a file named com.Rezolve.tracker, separated from other preferences used by the app.
 
-## Internal GroupBy testing
+## Internal Rezolve testing
 
-By default, beacons will be send to the production environment. This can be overridden by specifying a URL to send the beacons in the tracker constructor. This is useful for sending beacons to a test environment or to GroupBy's development environment.
+By default, beacons will be send to the production environment. This can be overridden by specifying a URL to send the beacons in the tracker constructor. This is useful for sending beacons to a test environment or to Rezolve's development environment.
 
 ```java
 // Optional, overrides the URL the beacon is sent to. Useful for testing.

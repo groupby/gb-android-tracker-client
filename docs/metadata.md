@@ -2,7 +2,7 @@
 
 Metadata is miscellaneous key value pair data not part of each event's schema that you can include in each beacon you send.
 
-This data cannot improve the quality of GroupBy's search results or recommendations (because those services can only be powered by data that follows a schema they are designed for) but it provides extra dimensions that can be used in GroupBy's analytics.
+This data cannot improve the quality of Rezolve's search results or recommendations (because those services can only be powered by data that follows a schema they are designed for) but it provides extra dimensions that can be used in Rezolve's analytics.
 
 ## Example
 
@@ -26,4 +26,4 @@ In every event type where metadata is included, the list of `Metadata` objects m
 
 ## More help
 
-Consult with your Technical Implementation Consultant at GroupBy for more guidance using this feature.
+Consult with your Technical Implementation Consultant at Rezolve for more guidance using this feature.

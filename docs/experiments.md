@@ -2,7 +2,7 @@
 
 Experiments are key value pairs of data not part of each event's schema that you can include each beacon you send.
 
-When you are running an A/B test, including details of the experiments in your A/B testing allows you to extend GroupBy's analytics by using your experiment as a a new dimension in analytics. For example, you can measure revenue for each bucket in your experiment.
+When you are running an A/B test, including details of the experiments in your A/B testing allows you to extend Rezolve's analytics by using your experiment as a a new dimension in analytics. For example, you can measure revenue for each bucket in your experiment.
 
 ## Example
 
@@ -37,4 +37,4 @@ In every event type where experiments are included, the list of `Experiments` ob
 
 ## More help
 
-Consult with your Technical Implementation Consultant at GroupBy for more guidance using this feature.
+Consult with your Technical Implementation Consultant at Rezolve for more guidance using this feature.

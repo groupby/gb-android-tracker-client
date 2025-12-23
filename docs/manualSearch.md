@@ -1,8 +1,8 @@
 # manualSearch
 
 Event type is used in case of:
-- Sends details of the search in case other than GroupBy search API is used.
-- For performing an A/B test between client's existing search engine and GroupBy Search.
+- Sends details of the search in case other than Rezolve search API is used.
+- For performing an A/B test between client's existing search engine and Rezolve Search.
 
 ## Example
 
@@ -114,7 +114,7 @@ ManualSearchEvent:
 
 | Property               | Description | Java type | Required? | Min | Max | String format |
 |------------------------| ----------- |-----------| --------- |-----|-----| ------------- |
-| googleAttributionToken | The Google attribution token as described in Google Cloud Platform's [documentation for Cloud Retail Solutions](https://cloud.google.com/retail/docs/attribution-tokens). Instructions for implementing this are evolving over time. If you use GroupBy's Google-powered platform, reach out to your Customer Success rep to find out whether you need to implement this property and if so, how you should do it. | `String`  | No | n/a | 255 | n/a |
+| googleAttributionToken | The Google attribution token as described in Google Cloud Platform's [documentation for Cloud Retail Solutions](https://cloud.google.com/retail/docs/attribution-tokens). Instructions for implementing this are evolving over time. If you use Rezolve's Google-powered platform, reach out to your Customer Success rep to find out whether you need to implement this property and if so, how you should do it. | `String`  | No | n/a | 255 | n/a |
 | search                 | The cart related to the event. | `Search`  | Yes | n/a | n/a | n/a |
 
 ManualSearchBeacon:

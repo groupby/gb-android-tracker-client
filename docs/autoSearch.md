@@ -1,8 +1,8 @@
 # autoSearch
 
-After performing a search using a GroupBy search API, this is used for sending details of the search to GroupBy's beacon API. The details are sent from the web browser using this event instead of being retrieved internally by GroupBy so that client tracking works correctly and aligns with the rest of the event types which must be sent from the client.
+After performing a search using a Rezolve search API, this is used for sending details of the search to Rezolve's beacon API. The details are sent from the web browser using this event instead of being retrieved internally by Rezolve so that client tracking works correctly and aligns with the rest of the event types which must be sent from the client.
 
-The search request could be a request to GroupBy's search API directly, or through a proxy.
+The search request could be a request to Rezolve's search API directly, or through a proxy.
 
 Note that in this example, it is blocking because the example data is stored in memory, but in your app, it may be non-blocking.
 
@@ -24,7 +24,7 @@ private static class ExampleSearchResults {
 
 ```java
 /**
- * Example of performing an HTTP request to GroupBy's search API. In the real world, the data
+ * Example of performing an HTTP request to Rezolve's search API. In the real world, the data
  * returned would include whichever records matched the search query and a UUID v4 as the search
  * ID, which is meant to be included in autoSearch beacons sent related to the request.
  *
@@ -94,8 +94,8 @@ AutoSearchEvent:
 
 | Property | Description | Java type | Required? | Min | Max | String format |
 | -------- | ----------- | --------- | --------- | --- | --- | ------------- |
-| searchId | The ID of the search performed with the GroupBy search engine API. This ID is returned in each HTTP response from the API and must be included in this event. | `UUID` | Yes | n/a | n/a | n/a |
-| origin | The context in which the search was performed. Acceptable values are \"search\" (used when a search query is used with the API), \"sayt\" (used when GroupBy's SAYT search engine API is used instead of its regular search engine API, for search-as-you-type use cases), and \"navigation\" (used when no search query is used because the search engine is being used to power a PLP consisting of a category of products, often after a shopper has selected a facet). | `AutoSearchEvent.Origin` enum value | Yes | n/a | n/a | n/a |
+| searchId | The ID of the search performed with the Rezolve search engine API. This ID is returned in each HTTP response from the API and must be included in this event. | `UUID` | Yes | n/a | n/a | n/a |
+| origin | The context in which the search was performed. Acceptable values are \"search\" (used when a search query is used with the API), \"sayt\" (used when Rezolve's SAYT search engine API is used instead of its regular search engine API, for search-as-you-type use cases), and \"navigation\" (used when no search query is used because the search engine is being used to power a PLP consisting of a category of products, often after a shopper has selected a facet). | `AutoSearchEvent.Origin` enum value | Yes | n/a | n/a | n/a |
 
 AutoSearchBeacon:
 
