@@ -111,7 +111,7 @@ Shoppers are tracked anonymously. Rezolve will know when a shopper returns but w
 
 VisitorId is a UUID used to anonymously track the user. This ID is not tied to any external systems and can only be used to track activity within the same app install. VisitorId has an expiry time of 1 year since the last time the shopper visited. After that, a new ID will be generated.
 
-This shared preferences is stored in a file named com.Rezolve.tracker, separated from other preferences used by the app.
+This shared preferences is stored in a file named com.groupby.tracker, separated from other preferences used by the app.
 
 ## Internal Rezolve testing
 
